@@ -1,0 +1,40 @@
+{
+  "farm": "B",
+  "seed": 42,
+  "n_sensors": 30,
+  "graph": {
+    "n_edges": 360,
+    "n_communities": 3,
+    "top_hubs": [
+      "sensor_6_avg",
+      "sensor_46_avg",
+      "reactive_power_11_avg",
+      "wind_speed_59_avg",
+      "sensor_54_avg"
+    ]
+  },
+  "events": {
+    "n_anomaly_events": 6,
+    "top_rootcause_sensors": [
+      "sensor_31_avg",
+      "reactive_power_11_avg",
+      "sensor_46_avg",
+      "sensor_53_avg",
+      "sensor_41_avg"
+    ]
+  },
+  "graph_ablation": {
+    "aprendido": {
+      "roc_ds": 0.7593,
+      "care_cv": 0.6445
+    },
+    "spearman_fijo": {
+      "roc_ds": 0.5741,
+      "care_cv": 0.5758
+    },
+    "sin_grafo_full": {
+      "roc_ds": 0.5185,
+      "care_cv": 0.5605
+    }
+  }
+}

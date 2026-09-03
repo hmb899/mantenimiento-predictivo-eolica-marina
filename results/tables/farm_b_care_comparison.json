@@ -1,0 +1,127 @@
+{
+  "farm": "B",
+  "window_size": 27,
+  "ref": "mid",
+  "threshold": 0.13811208307743073,
+  "project_metric": {
+    "care": 0.6651901520619911,
+    "coverage": 0.3549878536164877,
+    "earliness": 0.6978377742414038,
+    "reliability": 0.48387096774193544,
+    "accuracy": 0.894627082355064
+  },
+  "official_metric": {
+    "care": 0.5432472062555587,
+    "coverage": 0.33742035572640866,
+    "earliness": 0.10193462346953384,
+    "reliability": 0.47619047619047616,
+    "accuracy": 0.9003452879456871
+  },
+  "per_event_diag": [
+    {
+      "event_id": 34,
+      "event_label": "anomaly",
+      "n_pred_rows": 4033,
+      "n_windows": 4007,
+      "n_flagged_rows": 164
+    },
+    {
+      "event_id": 7,
+      "event_label": "anomaly",
+      "n_pred_rows": 5329,
+      "n_windows": 5293,
+      "n_flagged_rows": 64
+    },
+    {
+      "event_id": 53,
+      "event_label": "anomaly",
+      "n_pred_rows": 6048,
+      "n_windows": 5957,
+      "n_flagged_rows": 995
+    },
+    {
+      "event_id": 27,
+      "event_label": "anomaly",
+      "n_pred_rows": 9937,
+      "n_windows": 9096,
+      "n_flagged_rows": 602
+    },
+    {
+      "event_id": 19,
+      "event_label": "anomaly",
+      "n_pred_rows": 3745,
+      "n_windows": 3719,
+      "n_flagged_rows": 863
+    },
+    {
+      "event_id": 77,
+      "event_label": "anomaly",
+      "n_pred_rows": 9217,
+      "n_windows": 8998,
+      "n_flagged_rows": 1603
+    },
+    {
+      "event_id": 83,
+      "event_label": "normal",
+      "n_pred_rows": 14113,
+      "n_windows": 13972,
+      "n_flagged_rows": 1106
+    },
+    {
+      "event_id": 52,
+      "event_label": "normal",
+      "n_pred_rows": 2737,
+      "n_windows": 2711,
+      "n_flagged_rows": 0
+    },
+    {
+      "event_id": 21,
+      "event_label": "normal",
+      "n_pred_rows": 1297,
+      "n_windows": 1271,
+      "n_flagged_rows": 81
+    },
+    {
+      "event_id": 2,
+      "event_label": "normal",
+      "n_pred_rows": 2215,
+      "n_windows": 2189,
+      "n_flagged_rows": 462
+    },
+    {
+      "event_id": 23,
+      "event_label": "normal",
+      "n_pred_rows": 1983,
+      "n_windows": 1957,
+      "n_flagged_rows": 161
+    },
+    {
+      "event_id": 87,
+      "event_label": "normal",
+      "n_pred_rows": 3025,
+      "n_windows": 2999,
+      "n_flagged_rows": 444
+    },
+    {
+      "event_id": 74,
+      "event_label": "normal",
+      "n_pred_rows": 3073,
+      "n_windows": 3047,
+      "n_flagged_rows": 290
+    },
+    {
+      "event_id": 86,
+      "event_label": "normal",
+      "n_pred_rows": 2927,
+      "n_windows": 2901,
+      "n_flagged_rows": 664
+    },
+    {
+      "event_id": 82,
+      "event_label": "normal",
+      "n_pred_rows": 2449,
+      "n_windows": 2423,
+      "n_flagged_rows": 97
+    }
+  ]
+}

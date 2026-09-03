@@ -1,0 +1,20 @@
+{
+  "farm": "B",
+  "variant": "A",
+  "n_train_windows": 659206,
+  "n_features": 30,
+  "window_size": 27,
+  "threshold": 0.09038352221250534,
+  "care_score": 0.6740047966984976,
+  "coverage_fbeta": 0.64053475660066,
+  "accuracy": 0.7158701925194353,
+  "reliability_efbeta": 0.8333333333333334,
+  "earliness_ws": 0.46441550851962354,
+  "precision": 0.4785917256658479,
+  "recall": 0.29329988193624557,
+  "f1": 0.3637062386765002,
+  "auc_roc": 0.5037119074510273,
+  "auc_pr": 0.4762631261961088,
+  "auc_roc_smooth": 0.5037119074510273,
+  "auc_pr_smooth": 0.4762631261961088
+}

@@ -1,0 +1,78 @@
+# reimplementacion del ImDiffusion de Chen y otros (VLDB 2023, arXiv:2307.00754); el nucleo
+# deriva de CSDI (MIT). La deteccion, el umbral y el CUSUM los pone run_model.evaluate
+
+data:
+  processed_path: "data/processed"
+  raw_path: "data/raw/CARE_To_Compare"
+
+model:
+  channels: 64
+  layers: 4
+  nheads: 8
+  diffusion_embedding_dim: 128
+  feature_embedding_dim: 16
+  time_embedding_dim: 128
+
+diffusion:
+  num_steps: 50  # la T de la difusion
+  beta_start: 1.0e-4
+  beta_end: 0.5  # alto a proposito para imputar (ref: IMDiffusion config/base.yaml)
+
+masking:
+  split: 9  # tiras de window_size // split muestras, o sea 27/9 = 3 = 30 min
+  # time es la rejilla oficial y enmascara todos los sensores a la vez; feature_offset es la
+  # variante propia, con desfase por feature, y permite imputar cruzando sensores
+  mode: "time"
+  # ancla el viento y el ambiente como siempre observados, para imputar los endogenos dado el
+  # regimen limpio de operacion, condicional que un fallo rompe
+  regime_conditioning: false
+  exo_keywords: null  # con null van los anclajes por defecto de cada granja
+
+windowing:
+  window_size: 27  # la W del pipeline
+  stride_test: 1  # fijo por protocolo, los instantes de la ventana alimentan el tc oficial
+
+training:
+  epochs: 20
+  batch_size: 256
+  stride_train: 1  # palanca de coste, solo en train y nunca en test
+  learning_rate: 1.0e-3  # Adam al estilo de CSDI
+  weight_decay: 1.0e-6
+  lr_decay_milestones: [0.75, 0.9]  # fracciones del total de epocas, x0.1 en cada una (CSDI)
+  num_workers: 0
+
+scoring:
+  ddim_steps: 10  # el ddim_impute oficial (ref: IMDiffusion main_model.py)
+  eta: 1.0
+  n_samples: 1  # el promediado de varias muestras se queda como bandera
+  aggregation: "mean"  # sobre los sensores; tambien hay median y topk_q
+  topk_q: 0.9
+  batch_size: 512
+  step_ensemble: false  # voto entre pasos del DDIM
+  ensemble_percentile: 99.0
+  calib_stride: 1  # adelgaza los scores de train para calibrar el CUSUM
+
+threshold:
+  percentile: 99.0  # atributo cosmetico que exige el contrato del harness, campo del JSON
+
+output:
+  models_dir: "results/models"
+  tables_dir: "results/tables"
+  figures_dir: "results/figures"
+
+reproducibility:
+  seeds: [42, 7, 123]  # la cache de representacion se fija en la semilla 42
+
+per_farm:
+  B:
+    isolation_forest_mask: true  # se aplica la mascara de retencion del AE
+  C:
+    isolation_forest_mask: false  # la configuracion de C nunca uso Isolation Forest
+    features:
+      subset_file: "config/farm_c_top100_features.txt"
+    training:
+      batch_size: 64
+      epochs: 6
+    scoring:
+      batch_size: 128
+      calib_stride: 4  # unas 280k de las 1.12M ventanas de train, adelgazado determinista

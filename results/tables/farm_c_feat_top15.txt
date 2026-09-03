@@ -1,0 +1,15 @@
+sensor_75_avg
+sensor_146_avg
+sensor_147_avg
+sensor_94_avg
+sensor_200_avg
+sensor_18_avg
+sensor_152_avg
+sensor_186_avg
+sensor_126_avg
+sensor_74_avg
+sensor_191_avg
+sensor_153_avg
+sensor_123_avg
+sensor_189_avg
+sensor_125_avg

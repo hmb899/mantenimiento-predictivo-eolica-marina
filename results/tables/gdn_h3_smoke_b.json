@@ -1,0 +1,22 @@
+{
+  "milestone": "H3_smoke",
+  "farm": "B",
+  "features": "curated",
+  "seed": 42,
+  "epochs": 15,
+  "n_fit": 96000,
+  "n_val": 24000,
+  "aggregation": "max",
+  "loss_first": 0.5543102382024129,
+  "loss_last": 0.40240508715311685,
+  "train_seconds": 17.7,
+  "care_cv": 0.6561599091038616,
+  "care_oracle": 0.6592948399281507,
+  "optimism": 0.0031349308242891727,
+  "roc_ds": 0.6666666666666667,
+  "roc_window": 0.6095791659984117,
+  "coverage": 0.6518724123075315,
+  "earliness": 0.4681150026284984,
+  "reliability": 0.6521739130434783,
+  "accuracy": 0.7621564358306229
+}

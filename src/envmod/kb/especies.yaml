@@ -1,0 +1,113 @@
+# base de conocimiento ambiental del Mar del Norte y el German Bight. Cada entrada cita
+# su fuente por clave bib de la bibliografia de la memoria, y lo que no tiene cita
+# directa va marcado con assumption
+#
+# grupos auditivos de Southall 2019, que son los que gobiernan el canal de ruido. El
+# rorcual es de baja frecuencia y si oye la banda por debajo de 1 kHz; la marsopa es de
+# muy alta frecuencia y apenas la oye, asi que su peso de ruido es perturbacion y no dano
+# auditivo; las focas son fococarnivoros en agua, expuestos de forma repetida al ruido de
+# las embarcaciones
+#
+# encuadre honesto. El ruido operacional de la turbina, unos 170-177 dB en fuente para
+# 10 MW, queda muy por debajo del hincado de pilotes en construccion, unos 220 dB
+# impulsivos, de donde salen los umbrales UBA de abajo. Aqui se modela mantenimiento y no
+# construccion, asi que el impacto dominante es el trafico de embarcaciones, por colision
+# y por perturbacion, y el ruido es un factor conductual continuo que crece con la turbina
+# degradada (1.4 km de respuesta conductual con accionamiento directo frente a 6.3 km con
+# multiplicadora), de ahi el valor de detectar y reparar pronto
+periodos:
+  - especie: "Marsopa comun"
+    nombre_cientifico: "Phocoena phocoena"
+    actividad: "reproduccion"
+    mes_inicio: 5
+    mes_fin: 8
+    sensibilidad: 0.9
+    canal_impacto: "ambos"  # VHF, poco ruido, mas trafico; la cria es lo mas sensible
+    fuente: "EdA §fauna; parto may-jul (media 27 jun) y fase sensible may-ago en el Mar del Norte; zona de cria del SAC Sylt Outer Reef (German Bight). VHF (southall_2019): peso de ruido = perturbacion, no dano por <1 kHz"
+    assumption: false
+  - especie: "Rorcual aliblanco"
+    nombre_cientifico: "Balaenoptera acutorostrata"
+    actividad: "alimentacion"
+    mes_inicio: 6
+    mes_fin: 10
+    sensibilidad: 0.8
+    canal_impacto: "ruido_operacional"  # baja frecuencia, si oye por debajo de 1 kHz
+    fuente: "EdA §fauna; ballena barbada mas comun del Mar del Norte (northsea_minke_2019), alimentacion verano-otono. LF (southall_2019): genuinamente sensible a la banda <1 kHz del ruido operacional"
+    assumption: false
+  - especie: "Foca comun"
+    nombre_cientifico: "Phoca vitulina"
+    actividad: "paricion"
+    mes_inicio: 6
+    mes_fin: 7
+    sensibilidad: 0.7
+    canal_impacto: "ambos"  # PCW, ruido de embarcaciones y perturbacion del trafico
+    fuente: "EdA §fauna; paricion en junio en el Wadden Sea (linda con el German Bight, waddensea_seals_2022); expuesta de forma repetida al ruido de embarcaciones (harbourseal_noise_2023). PCW (southall_2019)"
+    assumption: false
+  - especie: "Aves marinas (alcatraz atlantico y otras)"
+    nombre_cientifico: null
+    actividad: "nidificacion"
+    mes_inicio: 4
+    mes_fin: 7
+    sensibilidad: 0.6
+    canal_impacto: "trafico_embarcaciones"
+    fuente: "EdA §fauna; nidificacion abr-jul; perturbadas por el trafico de embarcaciones de mantenimiento (no por el ruido submarino)"
+    assumption: false
+  - especie: "Foca gris"
+    nombre_cientifico: "Halichoerus grypus"
+    actividad: "paricion"
+    mes_inicio: 11
+    mes_fin: 1
+    sensibilidad: 0.5
+    canal_impacto: "ambos"  # ventana invernal, la meteo rara vez deja trabajar entonces
+    fuente: "EdA §fauna; paricion nov-ene en el Wadden Sea/Helgoland (waddensea_seals_2022). PCW (southall_2019). Anyade una ventana sensible invernal"
+    assumption: false
+  - especie: "Marsopa comun"
+    nombre_cientifico: "Phocoena phocoena"
+    actividad: "presencia_invernal"
+    mes_inicio: 11
+    mes_fin: 2
+    sensibilidad: 0.3
+    canal_impacto: "trafico_embarcaciones"
+    fuente: "supuesto de trabajo: presencia todo el anyo con menor sensibilidad fuera de reproduccion"
+    assumption: true
+
+reglas_ruido:
+  # umbrales de pilotaje del UBA y el BSH. El vinculante en la EEZ alemana desde 2008 y
+  # 2011 es dual, 190 dB de pico y 160 dB SEL a 750 m, y evita la TTS en la marsopa; los
+  # 140 dB SEL son el criterio precautorio de perturbacion. Al venir del hincado de pilotes
+  # valen aqui como referencia regulatoria, no como limite del ruido operacional
+  - nombre: "UBA/BSH pico (pilotaje, vinculante)"
+    umbral_db: 190.0
+    metrica: "pico Lp,pk re 1uPa"
+    distancia_m: 750
+    contexto: "criterio dual vinculante (con el SEL 160) del BSH/UBA para hincado de pilotes; evita el desplazamiento temporal de umbral (TTS) en la marsopa"
+    fuente: "EdA §marco regulatorio (uba_underwater_noise, bsh_underwater_sound)"
+  - nombre: "UBA/BSH SEL (pilotaje, vinculante)"
+    umbral_db: 160.0
+    metrica: "SEL re 1uPa2s"
+    distancia_m: 750
+    contexto: "segunda mitad del criterio dual vinculante del BSH/UBA (hincado de pilotes, 750 m)"
+    fuente: "EdA §marco regulatorio (uba_underwater_noise, bsh_underwater_sound)"
+  - nombre: "UBA SEL perturbacion (precautorio)"
+    umbral_db: 140.0
+    metrica: "SEL re 1uPa2s"
+    distancia_m: 750
+    contexto: "criterio PRECAUTORIO de perturbacion conductual (no el vinculante), del Sound Protection Concept aleman"
+    fuente: "EdA §marco regulatorio (ascobans_sound_protection)"
+  - nombre: "Restriccion velocidad embarcaciones (zonas con ballenas)"
+    umbral_db: 0.0
+    metrica: "n/a (operacional)"
+    distancia_m: null
+    contexto: "BOEM/NOAA: limites de velocidad de embarcaciones en presencia de grandes cetaceos (colision = amenaza principal, > ruido operacional)"
+    fuente: "EdA §marco regulatorio (boem_protecting_2024, fisheries_frequent_2024)"
+
+emision_operacional:
+  # parametros del modelo acustico simplificado de acoustic.py
+  banda_dominante_hz: [0, 1000]
+  nivel_min_db: 80.0  # re 1 uPa a 1 m; el pilotaje anda por los 220 dB
+  nivel_max_db: 150.0
+  incremento_nominal_db: 20.0  # +20 dB al llegar a nominal, tonal de 198 Hz
+  correlacion_viento_rotor: 0.95
+  viento_nominal_norm: 0.5  # nominal ~12 m/s y cut-out ~25 m/s, en la escala 0-1
+  anchura_transicion_norm: 0.05  # parametro de forma del salto sigmoide
+  fuente: "EdA §ruido mecanico (he_editorial_2023). El ruido operacional es continuo y de baja frecuencia, muy por debajo de los umbrales UBA de pilotaje; su relevancia es CONDUCTUAL y crece con la degradacion (multiplicadora). viento_nominal_norm y anchura son assumption (Limitaciones)"

@@ -1,0 +1,73 @@
+[project]
+name = "tfm-wind-turbine-predictive-maintenance"
+version = "0.1.0"
+description = "Predictive maintenance for offshore wind turbines with environmental constraints"
+requires-python = ">=3.12"
+dependencies = [
+    "pandas>=2.2.0",
+    "numpy>=1.26.0",
+    "matplotlib>=3.8.0",
+    "seaborn>=0.13.0",
+    "scipy>=1.12.0",
+    "scikit-learn>=1.4.0",
+    "jupyter>=1.0.0",
+    "notebook>=7.0.0",
+    "tqdm>=4.66.0",
+    "openpyxl>=3.1.0",
+    "pyyaml>=6.0.0",
+    # Acotada a la minor del entorno de los resultados (2.10.0+cu128): sin cota, el indice
+    # de PyTorch ofrece la ultima —hoy 2.11.0— y el lock dejaria de reproducir el entorno.
+    "torch>=2.10.0,<2.11",
+    # Las usa el codigo y faltaban por declarar: sin ellas un `pip install -e .` en
+    # maquina limpia rompe en el primer import. Cota = la version instalada en .venv.
+    "pymoo>=0.6.2",      # src/scheduler/nsga2.py
+    "pydantic>=2.13.4",  # src/agents/contracts.py
+    "requests>=2.32.5",  # src/agents/llm.py
+    "captum>=0.9.0",     # src/xai/attrib.py
+    "xarray>=2026.4.0",  # src/scheduler/era5_io.py
+    "cdsapi>=0.7.7",     # descarga de ERA5 (src/scheduler/era5_io.py)
+    # Se importan directamente pero hasta ahora solo llegaban por arrastre: networkx via torch,
+    # nbformat y nbclient via notebook. Declararlas quita esa dependencia del azar.
+    "networkx>=3.6.1",   # scripts/fusiones/gdn_interpretability.py
+    "nbformat>=5.10.4",  # scripts/nb/run_nb.py
+    "nbclient>=0.10.4",  # scripts/nb/run_nb.py
+    # xarray no trae motor NetCDF propio: era5_io.py:77 abre con xr.open_dataset los .nc
+    # que entrega el CDS y sin estas dos no encuentra backend. Llegaban por instalacion
+    # manual, no por el grafo de dependencias.
+    "netcdf4>=1.7.4",    # motor NetCDF de xarray, src/scheduler/era5_io.py
+    "cftime>=1.6.5",     # calendarios NetCDF, lo exige netcdf4 al leer las series ERA5
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "black>=24.0.0",
+    "ruff>=0.2.0",
+    # Para medir que parte del codigo ejercita la bateria de pruebas; estaba solo por
+    # instalacion manual, no declarada.
+    "coverage>=7.15.4",
+]
+torch = [
+    "torch>=2.0.0",
+]
+webapp = [
+    "fastapi>=0.110.0",
+    "uvicorn>=0.27.0",
+    "pywebview>=5.0.0",
+]
+
+# El entorno que produjo los resultados lleva torch 2.10.0+cu128, y PyPI solo publica la 2.10.0
+# sin sufijo: sin este bloque el lock pinaba la build de PyPI y un `uv sync` dejaba el entorno
+# sin CUDA. `explicit = true` restringe el indice a lo que se le asigna por nombre aqui debajo;
+# todo lo demas se sigue resolviendo contra PyPI.
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.uv.sources]
+# Solo Windows y Linux: el indice cu128 no publica ruedas de macOS, y sin este marcador
+# `uv sync` falla ahi por resolucion, no por falta de GPU. En macOS torch sale de PyPI.
+torch = [
+    { index = "pytorch-cu128", marker = "sys_platform == 'win32' or sys_platform == 'linux'" },
+]

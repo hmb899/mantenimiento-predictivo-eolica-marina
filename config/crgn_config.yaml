@@ -1,0 +1,83 @@
+# nucleo CRGN de Yang, Zhang y Yu (Energies 2025), dos encoders GCN residuales de pesos
+# compartidos entrenados con InfoNCE solo sobre operacion normal; el score de una ventana mide
+# cuanto se desvia su embedding del de las normales de validacion. Es el nucleo, no todo el
+# AFS-CRGN (sin AFS de multiplicadora, health index ni umbral SPC); el resto lo pone run_model
+
+data:
+  processed_path: "data/processed"
+  raw_path: "data/raw/CARE_To_Compare"
+
+model:
+  embed_dim: 64  # dimension oculta y de salida de las capas GCN, el embedding de nodo
+  gcn_layers: 2  # capas GCN residuales por encoder
+  leaky_relu_slope: 0.2
+  readout: "mean"  # pooling de nodo a embedding de ventana, tambien vale max
+  proj_dim: 64  # cabeza de proyeccion, solo para el espacio contrastivo
+
+# un nodo por variable; el grafo es fijo por parque y se construye solo con el train normal
+graph:
+  metric: "spearman"  # el SCADA no es normal, asi que Spearman y no Pearson
+  topk: 15  # vecinos por nodo, siempre muy por debajo del numero de nodos
+  weighted: true  # la adyacencia lleva |corr| de peso, en vez de ser binaria
+  self_loops: true
+  max_rows: 200000  # submuestreo de instantes del train normal, el Spearman cuesta
+
+augmentation:
+  noise_std: 0.1  # ruido gaussiano de la vista aumentada
+  mask_ratio: 0.2  # fraccion de entradas (nodo, tiempo) enmascaradas con ruido
+
+contrastive:
+  temperature: 0.5  # temperatura de InfoNCE, tambien llamada NT-Xent
+
+isolation_forest:  # limpia ventanas de la arm curated de B, para igualar al AE y al GDN
+  variance_threshold: 0.95
+  contamination: 0.01
+  n_estimators: 100
+
+windowing:
+  window_size: 27  # W congelada; la ventana entera es la feature del nodo, no hay forecast
+  stride_test: 1  # fijo por protocolo, los instantes de la ventana alimentan el tc oficial
+
+training:
+  epochs: 30
+  batch_size: 256
+  stride_train: 1  # palanca de coste, solo en train y nunca en test
+  learning_rate: 1.0e-3
+  weight_decay: 1.0e-5  # regularizacion L2
+  val_ratio: 0.2  # cola normal de referencia del score; la seleccion mira el ROC-ds
+  num_workers: 0
+
+scoring:
+  metric: "mahalanobis"  # desviacion al normal de validacion; la otra variante es knn
+  knn_k: 5  # vecinos de la variante knn
+  shrinkage: 1.0e-3  # regularizacion de la covarianza de Mahalanobis
+  batch_size: 512
+
+threshold:
+  percentile: 99.0  # atributo cosmetico que exige el contrato del harness
+
+output:
+  models_dir: "results/models"
+  tables_dir: "results/tables"
+  figures_dir: "results/figures"
+
+reproducibility:
+  seeds: [42, 7]
+
+# la representacion de sensores-como-nodo se reutiliza de las arms congeladas del GDN, con la
+# misma W, las mismas features y el mismo scaler, para que los numeros sean comparables
+per_farm:
+  B:
+    features: "curated"
+    isolation_forest_mask: true  # la misma mascara del Isolation Forest que usa el AE
+    graph:
+      topk: 12  # unos 30 nodos
+  C:
+    features: "top100"  # los 100 sensores del XAI, igual que el resto de modelos
+    isolation_forest_mask: false  # la via pca-first de C nunca uso Isolation Forest
+    graph:
+      topk: 18  # unos 100 nodos
+    training:
+      batch_size: 256
+      epochs: 20
+      stride_train: 8  # adelgaza el 1.12M de ventanas de C por coste y RAM; en test va a 1

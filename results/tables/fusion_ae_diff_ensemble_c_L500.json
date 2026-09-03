@@ -1,0 +1,84 @@
+{
+  "farm": "C",
+  "ensemble_seeds": [
+    42,
+    7,
+    123
+  ],
+  "cv_seeds": [
+    42,
+    7,
+    123
+  ],
+  "diff_level": 500,
+  "draws": 2,
+  "corr_ae_diff": 0.6428660933571544,
+  "fusions": [
+    {
+      "fusion": "max",
+      "alpha": null,
+      "care_cv_mean": 0.7446499478100531,
+      "care_cv_std": 0.0,
+      "care_cv_seeds": [
+        0.7446,
+        0.7446,
+        0.7446
+      ]
+    },
+    {
+      "fusion": "alpha_0.75",
+      "alpha": 0.75,
+      "care_cv_mean": 0.7432062133344055,
+      "care_cv_std": 0.0,
+      "care_cv_seeds": [
+        0.7432,
+        0.7432,
+        0.7432
+      ]
+    },
+    {
+      "fusion": "alpha_1.00",
+      "alpha": 1.0,
+      "care_cv_mean": 0.7431994612069186,
+      "care_cv_std": 0.0,
+      "care_cv_seeds": [
+        0.7432,
+        0.7432,
+        0.7432
+      ]
+    },
+    {
+      "fusion": "alpha_0.25",
+      "alpha": 0.25,
+      "care_cv_mean": 0.7312785555817077,
+      "care_cv_std": 1.1102230246251565e-16,
+      "care_cv_seeds": [
+        0.7313,
+        0.7313,
+        0.7313
+      ]
+    },
+    {
+      "fusion": "alpha_0.50",
+      "alpha": 0.5,
+      "care_cv_mean": 0.7226962967800751,
+      "care_cv_std": 0.0047533714640629315,
+      "care_cv_seeds": [
+        0.7182,
+        0.7293,
+        0.7207
+      ]
+    },
+    {
+      "fusion": "alpha_0.00",
+      "alpha": 0.0,
+      "care_cv_mean": 0.6808029273234034,
+      "care_cv_std": 0.0027822653435246765,
+      "care_cv_seeds": [
+        0.6779,
+        0.6846,
+        0.6799
+      ]
+    }
+  ]
+}

@@ -1,0 +1,428 @@
+{
+  "farm": "C",
+  "window_size": 27,
+  "ref": "mid",
+  "threshold": 0.12017569690942764,
+  "project_metric": {
+    "care": 0.7026288188952543,
+    "coverage": 0.4476777780935331,
+    "earliness": 0.7298254841810153,
+    "reliability": 0.5555555555555555,
+    "accuracy": 0.8900426383230841
+  },
+  "official_metric": {
+    "care": 0.5430095988740878,
+    "coverage": 0.2572874504177601,
+    "earliness": 0.18776650083050173,
+    "reliability": 0.47244094488188976,
+    "accuracy": 0.8987765491201437
+  },
+  "per_event_diag": [
+    {
+      "event_id": 55,
+      "event_label": "anomaly",
+      "n_pred_rows": 3193,
+      "n_windows": 3167,
+      "n_flagged_rows": 68
+    },
+    {
+      "event_id": 81,
+      "event_label": "anomaly",
+      "n_pred_rows": 1372,
+      "n_windows": 1302,
+      "n_flagged_rows": 193
+    },
+    {
+      "event_id": 47,
+      "event_label": "anomaly",
+      "n_pred_rows": 1577,
+      "n_windows": 1551,
+      "n_flagged_rows": 237
+    },
+    {
+      "event_id": 12,
+      "event_label": "anomaly",
+      "n_pred_rows": 3547,
+      "n_windows": 3073,
+      "n_flagged_rows": 1806
+    },
+    {
+      "event_id": 4,
+      "event_label": "anomaly",
+      "n_pred_rows": 3889,
+      "n_windows": 3863,
+      "n_flagged_rows": 0
+    },
+    {
+      "event_id": 18,
+      "event_label": "anomaly",
+      "n_pred_rows": 1728,
+      "n_windows": 1604,
+      "n_flagged_rows": 575
+    },
+    {
+      "event_id": 28,
+      "event_label": "anomaly",
+      "n_pred_rows": 3358,
+      "n_windows": 2954,
+      "n_flagged_rows": 1099
+    },
+    {
+      "event_id": 39,
+      "event_label": "anomaly",
+      "n_pred_rows": 1167,
+      "n_windows": 1141,
+      "n_flagged_rows": 741
+    },
+    {
+      "event_id": 66,
+      "event_label": "anomaly",
+      "n_pred_rows": 1807,
+      "n_windows": 1781,
+      "n_flagged_rows": 179
+    },
+    {
+      "event_id": 15,
+      "event_label": "anomaly",
+      "n_pred_rows": 2737,
+      "n_windows": 2711,
+      "n_flagged_rows": 115
+    },
+    {
+      "event_id": 78,
+      "event_label": "anomaly",
+      "n_pred_rows": 586,
+      "n_windows": 560,
+      "n_flagged_rows": 0
+    },
+    {
+      "event_id": 79,
+      "event_label": "anomaly",
+      "n_pred_rows": 721,
+      "n_windows": 695,
+      "n_flagged_rows": 0
+    },
+    {
+      "event_id": 30,
+      "event_label": "anomaly",
+      "n_pred_rows": 3551,
+      "n_windows": 1382,
+      "n_flagged_rows": 693
+    },
+    {
+      "event_id": 33,
+      "event_label": "anomaly",
+      "n_pred_rows": 3313,
+      "n_windows": 2453,
+      "n_flagged_rows": 0
+    },
+    {
+      "event_id": 11,
+      "event_label": "anomaly",
+      "n_pred_rows": 4021,
+      "n_windows": 2876,
+      "n_flagged_rows": 80
+    },
+    {
+      "event_id": 44,
+      "event_label": "anomaly",
+      "n_pred_rows": 10443,
+      "n_windows": 10177,
+      "n_flagged_rows": 913
+    },
+    {
+      "event_id": 49,
+      "event_label": "anomaly",
+      "n_pred_rows": 1606,
+      "n_windows": 1506,
+      "n_flagged_rows": 669
+    },
+    {
+      "event_id": 31,
+      "event_label": "anomaly",
+      "n_pred_rows": 2029,
+      "n_windows": 2003,
+      "n_flagged_rows": 1042
+    },
+    {
+      "event_id": 67,
+      "event_label": "anomaly",
+      "n_pred_rows": 8929,
+      "n_windows": 8900,
+      "n_flagged_rows": 161
+    },
+    {
+      "event_id": 9,
+      "event_label": "anomaly",
+      "n_pred_rows": 3469,
+      "n_windows": 3443,
+      "n_flagged_rows": 975
+    },
+    {
+      "event_id": 91,
+      "event_label": "anomaly",
+      "n_pred_rows": 4048,
+      "n_windows": 4022,
+      "n_flagged_rows": 715
+    },
+    {
+      "event_id": 5,
+      "event_label": "anomaly",
+      "n_pred_rows": 667,
+      "n_windows": 610,
+      "n_flagged_rows": 319
+    },
+    {
+      "event_id": 90,
+      "event_label": "anomaly",
+      "n_pred_rows": 2320,
+      "n_windows": 2294,
+      "n_flagged_rows": 561
+    },
+    {
+      "event_id": 70,
+      "event_label": "anomaly",
+      "n_pred_rows": 3478,
+      "n_windows": 3433,
+      "n_flagged_rows": 39
+    },
+    {
+      "event_id": 35,
+      "event_label": "anomaly",
+      "n_pred_rows": 1207,
+      "n_windows": 1007,
+      "n_flagged_rows": 246
+    },
+    {
+      "event_id": 16,
+      "event_label": "anomaly",
+      "n_pred_rows": 2304,
+      "n_windows": 1531,
+      "n_flagged_rows": 936
+    },
+    {
+      "event_id": 76,
+      "event_label": "anomaly",
+      "n_pred_rows": 822,
+      "n_windows": 796,
+      "n_flagged_rows": 65
+    },
+    {
+      "event_id": 8,
+      "event_label": "normal",
+      "n_pred_rows": 2242,
+      "n_windows": 2216,
+      "n_flagged_rows": 0
+    },
+    {
+      "event_id": 85,
+      "event_label": "normal",
+      "n_pred_rows": 1585,
+      "n_windows": 1559,
+      "n_flagged_rows": 1143
+    },
+    {
+      "event_id": 6,
+      "event_label": "normal",
+      "n_pred_rows": 2305,
+      "n_windows": 2279,
+      "n_flagged_rows": 197
+    },
+    {
+      "event_id": 62,
+      "event_label": "normal",
+      "n_pred_rows": 1032,
+      "n_windows": 1006,
+      "n_flagged_rows": 194
+    },
+    {
+      "event_id": 36,
+      "event_label": "normal",
+      "n_pred_rows": 2888,
+      "n_windows": 2667,
+      "n_flagged_rows": 398
+    },
+    {
+      "event_id": 56,
+      "event_label": "normal",
+      "n_pred_rows": 2296,
+      "n_windows": 2270,
+      "n_flagged_rows": 0
+    },
+    {
+      "event_id": 94,
+      "event_label": "normal",
+      "n_pred_rows": 2737,
+      "n_windows": 2711,
+      "n_flagged_rows": 208
+    },
+    {
+      "event_id": 54,
+      "event_label": "normal",
+      "n_pred_rows": 3025,
+      "n_windows": 2891,
+      "n_flagged_rows": 82
+    },
+    {
+      "event_id": 43,
+      "event_label": "normal",
+      "n_pred_rows": 2593,
+      "n_windows": 2567,
+      "n_flagged_rows": 404
+    },
+    {
+      "event_id": 50,
+      "event_label": "normal",
+      "n_pred_rows": 3457,
+      "n_windows": 2843,
+      "n_flagged_rows": 0
+    },
+    {
+      "event_id": 64,
+      "event_label": "normal",
+      "n_pred_rows": 1873,
+      "n_windows": 1847,
+      "n_flagged_rows": 0
+    },
+    {
+      "event_id": 46,
+      "event_label": "normal",
+      "n_pred_rows": 2573,
+      "n_windows": 2547,
+      "n_flagged_rows": 25
+    },
+    {
+      "event_id": 65,
+      "event_label": "normal",
+      "n_pred_rows": 3358,
+      "n_windows": 3332,
+      "n_flagged_rows": 21
+    },
+    {
+      "event_id": 61,
+      "event_label": "normal",
+      "n_pred_rows": 3025,
+      "n_windows": 2845,
+      "n_flagged_rows": 28
+    },
+    {
+      "event_id": 93,
+      "event_label": "normal",
+      "n_pred_rows": 3313,
+      "n_windows": 3285,
+      "n_flagged_rows": 0
+    },
+    {
+      "event_id": 75,
+      "event_label": "normal",
+      "n_pred_rows": 3601,
+      "n_windows": 3522,
+      "n_flagged_rows": 550
+    },
+    {
+      "event_id": 41,
+      "event_label": "normal",
+      "n_pred_rows": 4258,
+      "n_windows": 4232,
+      "n_flagged_rows": 376
+    },
+    {
+      "event_id": 58,
+      "event_label": "normal",
+      "n_pred_rows": 1873,
+      "n_windows": 1847,
+      "n_flagged_rows": 16
+    },
+    {
+      "event_id": 48,
+      "event_label": "normal",
+      "n_pred_rows": 2737,
+      "n_windows": 2711,
+      "n_flagged_rows": 25
+    },
+    {
+      "event_id": 88,
+      "event_label": "normal",
+      "n_pred_rows": 2881,
+      "n_windows": 2724,
+      "n_flagged_rows": 424
+    },
+    {
+      "event_id": 57,
+      "event_label": "normal",
+      "n_pred_rows": 2449,
+      "n_windows": 2423,
+      "n_flagged_rows": 804
+    },
+    {
+      "event_id": 32,
+      "event_label": "normal",
+      "n_pred_rows": 2449,
+      "n_windows": 2423,
+      "n_flagged_rows": 43
+    },
+    {
+      "event_id": 89,
+      "event_label": "normal",
+      "n_pred_rows": 2737,
+      "n_windows": 2711,
+      "n_flagged_rows": 776
+    },
+    {
+      "event_id": 59,
+      "event_label": "normal",
+      "n_pred_rows": 2737,
+      "n_windows": 2711,
+      "n_flagged_rows": 171
+    },
+    {
+      "event_id": 63,
+      "event_label": "normal",
+      "n_pred_rows": 2305,
+      "n_windows": 2243,
+      "n_flagged_rows": 609
+    },
+    {
+      "event_id": 80,
+      "event_label": "normal",
+      "n_pred_rows": 2353,
+      "n_windows": 2312,
+      "n_flagged_rows": 0
+    },
+    {
+      "event_id": 37,
+      "event_label": "normal",
+      "n_pred_rows": 2449,
+      "n_windows": 2423,
+      "n_flagged_rows": 29
+    },
+    {
+      "event_id": 29,
+      "event_label": "normal",
+      "n_pred_rows": 2305,
+      "n_windows": 2250,
+      "n_flagged_rows": 847
+    },
+    {
+      "event_id": 1,
+      "event_label": "normal",
+      "n_pred_rows": 2161,
+      "n_windows": 2135,
+      "n_flagged_rows": 0
+    },
+    {
+      "event_id": 20,
+      "event_label": "normal",
+      "n_pred_rows": 2593,
+      "n_windows": 2519,
+      "n_flagged_rows": 37
+    },
+    {
+      "event_id": 60,
+      "event_label": "normal",
+      "n_pred_rows": 2449,
+      "n_windows": 2384,
+      "n_flagged_rows": 397
+    }
+  ]
+}

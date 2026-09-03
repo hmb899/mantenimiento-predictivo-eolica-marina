@@ -1,0 +1,40 @@
+{
+  "farm": "C",
+  "seed": 42,
+  "n_sensors": 100,
+  "graph": {
+    "n_edges": 1800,
+    "n_communities": 3,
+    "top_hubs": [
+      "sensor_76_avg",
+      "sensor_43_avg",
+      "sensor_218_avg",
+      "sensor_178_avg",
+      "sensor_232_avg"
+    ]
+  },
+  "events": {
+    "n_anomaly_events": 27,
+    "top_rootcause_sensors": [
+      "sensor_186_avg",
+      "sensor_35_avg",
+      "sensor_150_avg",
+      "sensor_125_avg",
+      "sensor_97_avg"
+    ]
+  },
+  "graph_ablation": {
+    "aprendido": {
+      "roc_ds": 0.8459,
+      "care_cv": 0.7297
+    },
+    "spearman_fijo": {
+      "roc_ds": 0.7718,
+      "care_cv": 0.6599
+    },
+    "sin_grafo_full": {
+      "roc_ds": 0.736,
+      "care_cv": 0.6583
+    }
+  }
+}

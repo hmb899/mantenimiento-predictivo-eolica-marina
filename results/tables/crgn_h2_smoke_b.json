@@ -1,0 +1,22 @@
+{
+  "milestone": "H2_smoke",
+  "farm": "B",
+  "features": "curated",
+  "seed": 42,
+  "epochs": 30,
+  "n_fit": 120000,
+  "n_val": 81427,
+  "metric": "mahalanobis",
+  "loss_first": 4.570498238261949,
+  "loss_last": 4.299999097473601,
+  "train_seconds": 54.1,
+  "care_cv": 0.6361149288541584,
+  "care_oracle": 0.6361149288541584,
+  "optimism": 0.0,
+  "roc_ds": 0.7407407407407407,
+  "roc_window": 0.5023005383559058,
+  "coverage": 0.7301600067265671,
+  "earliness": 0.3708837844621739,
+  "reliability": 0.5172413793103449,
+  "accuracy": 0.7811447368858532
+}

@@ -1,0 +1,8 @@
+# granja C con las _avg, sin estadisticos extra ni poda por correlacion, tope de 60 features
+# y dedup
+data:
+  dedup_train: true
+feature_selection:
+  extra_statistics: []
+  correlation_threshold: 1.01
+  max_features: 60

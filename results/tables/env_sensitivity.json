@@ -1,0 +1,128 @@
+{
+  "DUR_dias": 3,
+  "esquemas": {
+    "baseline (0.9/0.8/0.6/0.3)": {
+      "pico": "may",
+      "valle": "mar",
+      "jun": 5.4,
+      "oct": 2.4,
+      "ratio_jun_oct": 2.25,
+      "pico_en_verano": false,
+      "veto": "Marsopa comun/reproduccion m5-8",
+      "curva": {
+        "ene": 3.0,
+        "feb": 0.9,
+        "mar": 0.0,
+        "abr": 1.8,
+        "may": 5.4,
+        "jun": 5.4,
+        "jul": 5.4,
+        "ago": 5.4,
+        "sep": 2.4,
+        "oct": 2.4,
+        "nov": 3.0,
+        "dic": 3.0
+      }
+    },
+    "todos iguales (1.0)": {
+      "pico": "ene",
+      "valle": "mar",
+      "jun": 6.0,
+      "oct": 3.0,
+      "ratio_jun_oct": 2.0,
+      "pico_en_verano": false,
+      "veto": "Marsopa comun/reproduccion m5-8",
+      "curva": {
+        "ene": 6.0,
+        "feb": 3.0,
+        "mar": 0.0,
+        "abr": 3.0,
+        "may": 6.0,
+        "jun": 6.0,
+        "jul": 6.0,
+        "ago": 6.0,
+        "sep": 3.0,
+        "oct": 3.0,
+        "nov": 6.0,
+        "dic": 6.0
+      }
+    },
+    "uniforme 0.5": {
+      "pico": "ene",
+      "valle": "mar",
+      "jun": 3.0,
+      "oct": 1.5,
+      "ratio_jun_oct": 2.0,
+      "pico_en_verano": false,
+      "veto": "Marsopa comun/reproduccion m5-8",
+      "curva": {
+        "ene": 3.0,
+        "feb": 1.5,
+        "mar": 0.0,
+        "abr": 1.5,
+        "may": 3.0,
+        "jun": 3.0,
+        "jul": 3.0,
+        "ago": 3.0,
+        "sep": 1.5,
+        "oct": 1.5,
+        "nov": 3.0,
+        "dic": 3.0
+      }
+    },
+    "marsopa-repro a la mitad (0.45)": {
+      "pico": "jun",
+      "valle": "mar",
+      "jun": 4.5,
+      "oct": 2.4,
+      "ratio_jun_oct": 1.875,
+      "pico_en_verano": true,
+      "veto": "Rorcual aliblanco/alimentacion m6-10",
+      "curva": {
+        "ene": 3.0,
+        "feb": 0.9,
+        "mar": 0.0,
+        "abr": 1.8,
+        "may": 3.15,
+        "jun": 4.5,
+        "jul": 4.5,
+        "ago": 3.75,
+        "sep": 2.4,
+        "oct": 2.4,
+        "nov": 3.0,
+        "dic": 3.0
+      }
+    },
+    "orden invertido (0.3/0.6/0.8/0.9)": {
+      "pico": "jun",
+      "valle": "mar",
+      "jun": 4.5,
+      "oct": 1.8,
+      "ratio_jun_oct": 2.5,
+      "pico_en_verano": true,
+      "veto": "Foca comun/paricion m6-7",
+      "curva": {
+        "ene": 4.2,
+        "feb": 2.7,
+        "mar": 0.0,
+        "abr": 2.4,
+        "may": 3.3,
+        "jun": 4.5,
+        "jul": 4.5,
+        "ago": 2.7,
+        "sep": 1.8,
+        "oct": 1.8,
+        "nov": 4.2,
+        "dic": 4.2
+      }
+    }
+  },
+  "aleatorio_pm30": {
+    "n": 200,
+    "jun_gt_oct": 200,
+    "pico_en_verano": 78,
+    "ratio_jun_oct_medio": 2.343,
+    "ratio_min": 1.687
+  },
+  "veredicto_robusto": false
+}

@@ -1,0 +1,22 @@
+{
+  "milestone": "H1_canary",
+  "n_windows": 256,
+  "epochs": 400,
+  "n_params": 14272,
+  "embed_dim": 64,
+  "gcn_layers": 2,
+  "topk": 12,
+  "metric": "mahalanobis",
+  "loss_first": 5.935189247131348,
+  "loss_last": 4.331413745880127,
+  "score_train_mean": 22.755106925060385,
+  "score_train_std": 13.921212273698343,
+  "score_permuted_mean": 56.63446072783429,
+  "score_noise_mean": 141.87593929021,
+  "ratio_permuted_over_train": 2.488868143505065,
+  "ratio_noise_over_train": 6.234905410792022,
+  "verdict": "PASS",
+  "train_seconds": 3.0,
+  "device": "cuda",
+  "figure": "results\\figures\\crgn\\h1_canary.png"
+}

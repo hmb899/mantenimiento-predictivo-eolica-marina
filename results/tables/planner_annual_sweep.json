@@ -1,0 +1,503 @@
+{
+  "weather": "era5",
+  "n_escenarios": 20,
+  "horizonte_dias": 270,
+  "seed": 42,
+  "politicas_menu": [
+    "derate",
+    "hibrida_opt",
+    "stop"
+  ],
+  "subsistemas": {
+    "multiplicadora": {
+      "reactivo": 1280000.0,
+      "meses": {
+        "ene": {
+          "con": {
+            "dia": 33,
+            "fecha_inicio": "2026-02-03",
+            "politica": "derate",
+            "coste": 648419.8,
+            "riesgo": 0.133,
+            "impacto": 2.36,
+            "impacto_real": 2.36
+          },
+          "sin": {
+            "dia": 56,
+            "fecha_inicio": "2026-02-26",
+            "politica": "hibrida_opt",
+            "coste": 566160.9,
+            "riesgo": 0.156,
+            "impacto": 0.0,
+            "impacto_real": 1.69
+          }
+        },
+        "feb": {
+          "con": {
+            "dia": 28,
+            "fecha_inicio": "2026-03-01",
+            "politica": "derate",
+            "coste": 669120.7,
+            "riesgo": 0.121,
+            "impacto": 0.0,
+            "impacto_real": 0.0
+          },
+          "sin": {
+            "dia": 56,
+            "fecha_inicio": "2026-03-29",
+            "politica": "hibrida_opt",
+            "coste": 577467.6,
+            "riesgo": 0.16,
+            "impacto": 0.0,
+            "impacto_real": 1.89
+          }
+        },
+        "mar": {
+          "con": {
+            "dia": 23,
+            "fecha_inicio": "2026-03-24",
+            "politica": "derate",
+            "coste": 684213.1,
+            "riesgo": 0.115,
+            "impacto": 0.3,
+            "impacto_real": 0.3
+          },
+          "sin": {
+            "dia": 56,
+            "fecha_inicio": "2026-04-26",
+            "politica": "hibrida_opt",
+            "coste": 558960.9,
+            "riesgo": 0.156,
+            "impacto": 0.0,
+            "impacto_real": 3.48
+          }
+        },
+        "abr": {
+          "con": {
+            "dia": 0,
+            "fecha_inicio": "2026-04-01",
+            "politica": "stop",
+            "coste": 718361.4,
+            "riesgo": 0.0,
+            "impacto": 3.0,
+            "impacto_real": 3.0
+          },
+          "sin": {
+            "dia": 56,
+            "fecha_inicio": "2026-05-27",
+            "politica": "hibrida_opt",
+            "coste": 560400.9,
+            "riesgo": 0.156,
+            "impacto": 0.0,
+            "impacto_real": 10.36
+          }
+        },
+        "may": {
+          "con": {
+            "dia": 123,
+            "fecha_inicio": "2026-09-01",
+            "politica": "hibrida_opt",
+            "coste": 1248315.6,
+            "riesgo": 0.144,
+            "impacto": 6.59,
+            "impacto_real": 10.42
+          },
+          "sin": {
+            "dia": 56,
+            "fecha_inicio": "2026-06-26",
+            "politica": "hibrida_opt",
+            "coste": 561360.9,
+            "riesgo": 0.156,
+            "impacto": 0.0,
+            "impacto_real": 11.9
+          }
+        },
+        "jun": {
+          "con": {
+            "dia": 92,
+            "fecha_inicio": "2026-09-01",
+            "politica": "stop",
+            "coste": 1220600.0,
+            "riesgo": 0.0,
+            "impacto": 4.0,
+            "impacto_real": 8.8
+          },
+          "sin": {
+            "dia": 56,
+            "fecha_inicio": "2026-07-27",
+            "politica": "hibrida_opt",
+            "coste": 565200.9,
+            "riesgo": 0.156,
+            "impacto": 0.0,
+            "impacto_real": 11.91
+          }
+        },
+        "jul": {
+          "con": {
+            "dia": 62,
+            "fecha_inicio": "2026-09-01",
+            "politica": "hibrida_opt",
+            "coste": 1011160.0,
+            "riesgo": 0.1,
+            "impacto": 4.0,
+            "impacto_real": 7.24
+          },
+          "sin": {
+            "dia": 56,
+            "fecha_inicio": "2026-08-26",
+            "politica": "hibrida_opt",
+            "coste": 562488.0,
+            "riesgo": 0.158,
+            "impacto": 0.0,
+            "impacto_real": 11.55
+          }
+        },
+        "ago": {
+          "con": {
+            "dia": 37,
+            "fecha_inicio": "2026-09-07",
+            "politica": "derate",
+            "coste": 628420.6,
+            "riesgo": 0.131,
+            "impacto": 5.89,
+            "impacto_real": 5.89
+          },
+          "sin": {
+            "dia": 53,
+            "fecha_inicio": "2026-09-23",
+            "politica": "hibrida_opt",
+            "coste": 576900.2,
+            "riesgo": 0.15,
+            "impacto": 0.0,
+            "impacto_real": 6.63
+          }
+        },
+        "sep": {
+          "con": {
+            "dia": 27,
+            "fecha_inicio": "2026-09-28",
+            "politica": "derate",
+            "coste": 672110.3,
+            "riesgo": 0.12,
+            "impacto": 5.28,
+            "impacto_real": 5.28
+          },
+          "sin": {
+            "dia": 56,
+            "fecha_inicio": "2026-10-27",
+            "politica": "hibrida_opt",
+            "coste": 589464.0,
+            "riesgo": 0.164,
+            "impacto": 0.0,
+            "impacto_real": 7.13
+          }
+        },
+        "oct": {
+          "con": {
+            "dia": 13,
+            "fecha_inicio": "2026-10-14",
+            "politica": "derate",
+            "coste": 729263.9,
+            "riesgo": 0.107,
+            "impacto": 4.64,
+            "impacto_real": 4.64
+          },
+          "sin": {
+            "dia": 54,
+            "fecha_inicio": "2026-11-24",
+            "politica": "hibrida_opt",
+            "coste": 596130.9,
+            "riesgo": 0.154,
+            "impacto": 0.0,
+            "impacto_real": 7.1
+          }
+        },
+        "nov": {
+          "con": {
+            "dia": 22,
+            "fecha_inicio": "2026-11-23",
+            "politica": "derate",
+            "coste": 705876.5,
+            "riesgo": 0.117,
+            "impacto": 5.69,
+            "impacto_real": 5.69
+          },
+          "sin": {
+            "dia": 54,
+            "fecha_inicio": "2026-12-25",
+            "politica": "hibrida_opt",
+            "coste": 596834.8,
+            "riesgo": 0.158,
+            "impacto": 0.0,
+            "impacto_real": 6.6
+          }
+        },
+        "dic": {
+          "con": {
+            "dia": 62,
+            "fecha_inicio": "2027-02-01",
+            "politica": "derate",
+            "coste": 626367.1,
+            "riesgo": 0.19,
+            "impacto": 3.28,
+            "impacto_real": 3.28
+          },
+          "sin": {
+            "dia": 50,
+            "fecha_inicio": "2027-01-20",
+            "politica": "hibrida_opt",
+            "coste": 598166.4,
+            "riesgo": 0.146,
+            "impacto": 0.0,
+            "impacto_real": 6.31
+          }
+        }
+      }
+    },
+    "generador": {
+      "reactivo": 563200.0,
+      "meses": {
+        "ene": {
+          "con": {
+            "dia": 4,
+            "fecha_inicio": "2026-01-05",
+            "politica": "derate",
+            "coste": 269075.3,
+            "riesgo": 0.081,
+            "impacto": 1.52,
+            "impacto_real": 1.52
+          },
+          "sin": {
+            "dia": 7,
+            "fecha_inicio": "2026-01-08",
+            "politica": "hibrida_opt",
+            "coste": 224023.6,
+            "riesgo": 0.081,
+            "impacto": 0.0,
+            "impacto_real": 1.61
+          }
+        },
+        "feb": {
+          "con": {
+            "dia": 27,
+            "fecha_inicio": "2026-02-28",
+            "politica": "derate",
+            "coste": 257465.8,
+            "riesgo": 0.089,
+            "impacto": 0.12,
+            "impacto_real": 0.12
+          },
+          "sin": {
+            "dia": 11,
+            "fecha_inicio": "2026-02-12",
+            "politica": "hibrida_opt",
+            "coste": 237136.3,
+            "riesgo": 0.083,
+            "impacto": 0.0,
+            "impacto_real": 0.53
+          }
+        },
+        "mar": {
+          "con": {
+            "dia": 7,
+            "fecha_inicio": "2026-03-08",
+            "politica": "hibrida_opt",
+            "coste": 225220.9,
+            "riesgo": 0.08,
+            "impacto": 0.0,
+            "impacto_real": 0.0
+          },
+          "sin": {
+            "dia": 7,
+            "fecha_inicio": "2026-03-08",
+            "politica": "hibrida_opt",
+            "coste": 213947.2,
+            "riesgo": 0.081,
+            "impacto": 0.0,
+            "impacto_real": 0.0
+          }
+        },
+        "abr": {
+          "con": {
+            "dia": 7,
+            "fecha_inicio": "2026-04-08",
+            "politica": "stop",
+            "coste": 250680.0,
+            "riesgo": 0.0,
+            "impacto": 1.08,
+            "impacto_real": 1.08
+          },
+          "sin": {
+            "dia": 9,
+            "fecha_inicio": "2026-04-10",
+            "politica": "hibrida_opt",
+            "coste": 220423.5,
+            "riesgo": 0.081,
+            "impacto": 0.0,
+            "impacto_real": 1.08
+          }
+        },
+        "may": {
+          "con": {
+            "dia": 7,
+            "fecha_inicio": "2026-05-08",
+            "politica": "stop",
+            "coste": 231480.0,
+            "riesgo": 0.0,
+            "impacto": 2.43,
+            "impacto_real": 2.8
+          },
+          "sin": {
+            "dia": 7,
+            "fecha_inicio": "2026-05-08",
+            "politica": "hibrida_opt",
+            "coste": 209586.4,
+            "riesgo": 0.081,
+            "impacto": 0.0,
+            "impacto_real": 2.8
+          }
+        },
+        "jun": {
+          "con": {
+            "dia": 7,
+            "fecha_inicio": "2026-06-08",
+            "politica": "hibrida_opt",
+            "coste": 263480.0,
+            "riesgo": 0.08,
+            "impacto": 2.43,
+            "impacto_real": 2.8
+          },
+          "sin": {
+            "dia": 7,
+            "fecha_inicio": "2026-06-08",
+            "politica": "hibrida_opt",
+            "coste": 209586.4,
+            "riesgo": 0.081,
+            "impacto": 0.0,
+            "impacto_real": 2.8
+          }
+        },
+        "jul": {
+          "con": {
+            "dia": 2,
+            "fecha_inicio": "2026-07-03",
+            "politica": "derate",
+            "coste": 318066.2,
+            "riesgo": 0.08,
+            "impacto": 2.56,
+            "impacto_real": 2.56
+          },
+          "sin": {
+            "dia": 7,
+            "fecha_inicio": "2026-07-08",
+            "politica": "hibrida_opt",
+            "coste": 211831.7,
+            "riesgo": 0.08,
+            "impacto": 0.0,
+            "impacto_real": 2.79
+          }
+        },
+        "ago": {
+          "con": {
+            "dia": 4,
+            "fecha_inicio": "2026-08-05",
+            "politica": "derate",
+            "coste": 282212.5,
+            "riesgo": 0.08,
+            "impacto": 2.64,
+            "impacto_real": 2.64
+          },
+          "sin": {
+            "dia": 9,
+            "fecha_inicio": "2026-08-10",
+            "politica": "hibrida_opt",
+            "coste": 217297.5,
+            "riesgo": 0.081,
+            "impacto": 0.0,
+            "impacto_real": 2.92
+          }
+        },
+        "sep": {
+          "con": {
+            "dia": 7,
+            "fecha_inicio": "2026-09-08",
+            "politica": "stop",
+            "coste": 243960.0,
+            "riesgo": 0.0,
+            "impacto": 0.72,
+            "impacto_real": 1.06
+          },
+          "sin": {
+            "dia": 8,
+            "fecha_inicio": "2026-09-09",
+            "politica": "hibrida_opt",
+            "coste": 219327.3,
+            "riesgo": 0.081,
+            "impacto": 0.0,
+            "impacto_real": 1.1
+          }
+        },
+        "oct": {
+          "con": {
+            "dia": 7,
+            "fecha_inicio": "2026-10-08",
+            "politica": "stop",
+            "coste": 241080.0,
+            "riesgo": 0.0,
+            "impacto": 0.72,
+            "impacto_real": 1.07
+          },
+          "sin": {
+            "dia": 7,
+            "fecha_inicio": "2026-10-08",
+            "politica": "hibrida_opt",
+            "coste": 215797.0,
+            "riesgo": 0.081,
+            "impacto": 0.0,
+            "impacto_real": 1.07
+          }
+        },
+        "nov": {
+          "con": {
+            "dia": 7,
+            "fecha_inicio": "2026-11-08",
+            "politica": "hibrida_opt",
+            "coste": 275000.0,
+            "riesgo": 0.08,
+            "impacto": 1.35,
+            "impacto_real": 1.58
+          },
+          "sin": {
+            "dia": 7,
+            "fecha_inicio": "2026-11-08",
+            "politica": "hibrida_opt",
+            "coste": 213946.6,
+            "riesgo": 0.081,
+            "impacto": 0.0,
+            "impacto_real": 1.58
+          }
+        },
+        "dic": {
+          "con": {
+            "dia": 3,
+            "fecha_inicio": "2026-12-04",
+            "politica": "derate",
+            "coste": 297935.1,
+            "riesgo": 0.081,
+            "impacto": 1.48,
+            "impacto_real": 1.48
+          },
+          "sin": {
+            "dia": 8,
+            "fecha_inicio": "2026-12-09",
+            "politica": "hibrida_opt",
+            "coste": 219901.0,
+            "riesgo": 0.082,
+            "impacto": 0.0,
+            "impacto_real": 1.65
+          }
+        }
+      }
+    }
+  }
+}

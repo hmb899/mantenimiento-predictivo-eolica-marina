@@ -1,0 +1,38 @@
+{
+  "milestone": "H4",
+  "farm": "C",
+  "features": "top100",
+  "seeds": [
+    42,
+    7
+  ],
+  "epochs": 20,
+  "metric": "mahalanobis",
+  "topk": 18,
+  "care_cv_mean": 0.7306126314786175,
+  "care_cv_std": 0.0002219908404375026,
+  "roc_ds_mean": 0.8763440860215054,
+  "roc_ds_std": 0.0005973715651135247,
+  "per_seed": [
+    {
+      "seed": 42,
+      "care_cv": 0.73039064063818,
+      "roc_ds": 0.8769414575866189,
+      "coverage": 0.7535712306912757,
+      "earliness": 0.546458348927175,
+      "reliability": 0.6666666666666666,
+      "accuracy": 0.8426284784528915,
+      "optimism": 0.0
+    },
+    {
+      "seed": 7,
+      "care_cv": 0.730834622319055,
+      "roc_ds": 0.8757467144563919,
+      "coverage": 0.7563861124187113,
+      "earliness": 0.551480274813018,
+      "reliability": 0.6650246305418719,
+      "accuracy": 0.8406410469108372,
+      "optimism": 0.0
+    }
+  ]
+}

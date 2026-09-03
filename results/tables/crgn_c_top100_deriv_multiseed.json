@@ -1,0 +1,41 @@
+{
+  "milestone": "H5_ola3b_deriv",
+  "farm": "C",
+  "features": "top100",
+  "subset": "",
+  "derivatives": true,
+  "seeds": [
+    42,
+    7
+  ],
+  "epochs": 20,
+  "metric": "mahalanobis",
+  "n_nodes": 100,
+  "topk": 18,
+  "care_cv_mean": 0.7091932667792187,
+  "care_cv_std": 0.0014865087096492258,
+  "roc_ds_mean": 0.8372162485065711,
+  "roc_ds_std": 0.009259259259259245,
+  "per_seed": [
+    {
+      "seed": 42,
+      "care_cv": 0.7077067580695694,
+      "roc_ds": 0.8279569892473119,
+      "coverage": 0.6913194487323582,
+      "earliness": 0.49130303901685574,
+      "reliability": 0.6684491978609626,
+      "accuracy": 0.8595003719492632,
+      "optimism": 0.0063077278321711505
+    },
+    {
+      "seed": 7,
+      "care_cv": 0.7106797754888678,
+      "roc_ds": 0.8464755077658304,
+      "coverage": 0.7224410168119024,
+      "earliness": 0.5239727079808717,
+      "reliability": 0.6410256410256411,
+      "accuracy": 0.844836637853256,
+      "optimism": 0.004742752816117579
+    }
+  ]
+}

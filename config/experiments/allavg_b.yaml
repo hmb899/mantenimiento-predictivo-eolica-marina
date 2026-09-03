@@ -1,0 +1,10 @@
+# granja B con todas las _avg, sin estadisticos extra, sin poda por correlacion y con el tope
+# de features levantado; ademas dedup y sin suavizado
+data:
+  dedup_train: true
+smoothing:
+  enabled: false
+feature_selection:
+  extra_statistics: []
+  correlation_threshold: 1.01
+  max_features: 1000

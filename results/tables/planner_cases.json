@@ -1,0 +1,222 @@
+{
+  "weather": "era5",
+  "n_escenarios": 30,
+  "diagnostico": [
+    {
+      "farm": "C",
+      "event_id": 11,
+      "margen": 600.335,
+      "tipo": "relacional",
+      "triaje": "escalar",
+      "urgencia_dias": 28,
+      "hipotesis": "Recomendacion: escalar a planificacion: reparar DENTRO de la ventana, antes de la rotura prevista.\nQue pasa: el sensor val__sensor_15 (indicador) ya no encaja con lo que predice el resto de la turbina: el componente que vigila se esta desviando (deriva relacional), patron compatible con una degradacion incipiente semanas antes; senal fuerte y sostenida (margen 600x, activa el 100% del tiempo tras dispararse).\nA que atenerse: si no se actua, lo mas probable es que el componente quede inservible en ~28 dias (estimacion del detector); operar derateada frena el daño y da margen para planificar la reparacion en una buena ventana."
+    },
+    {
+      "farm": "C",
+      "event_id": 15,
+      "margen": 0.214,
+      "tipo": "sin_senal",
+      "triaje": "descartar",
+      "urgencia_dias": null,
+      "hipotesis": "Recomendacion: descartar; no requiere accion.\nQue pasa: ningun sensor marca una desviacion relevante (margen 0.2 < 1).\nA que atenerse: ausencia de precursor accionable en los valores."
+    },
+    {
+      "farm": "B",
+      "event_id": 34,
+      "margen": 3.621,
+      "tipo": "mixto",
+      "triaje": "vigilar",
+      "urgencia_dias": null,
+      "hipotesis": "Recomendacion: mantener en vigilancia y revisar en los proximos ciclos; no intervenir aun.\nQue pasa: el sensor val__sensor_9_avg se desvia y ademas arrastra a su contexto (patron mixto); senal debil y poco sostenida (margen 4x, activa el 24% del tiempo tras dispararse).\nA que atenerse: no requiere accion inmediata; si la senal se refuerza o se vuelve sostenida, pasara a escalar."
+    },
+    {
+      "farm": "B",
+      "event_id": 53,
+      "margen": 35.438,
+      "tipo": "mixto",
+      "triaje": "escalar",
+      "urgencia_dias": 30,
+      "hipotesis": "Recomendacion: escalar a planificacion: reparar DENTRO de la ventana, antes de la rotura prevista.\nQue pasa: el sensor val__sensor_9_avg se desvia y ademas arrastra a su contexto (patron mixto); senal fuerte y sostenida (margen 35x, activa el 99% del tiempo tras dispararse).\nA que atenerse: si no se actua, lo mas probable es que el componente quede inservible en ~30 dias (estimacion del detector); operar derateada frena el daño y da margen para planificar la reparacion en una buena ventana."
+    }
+  ],
+  "casos": [
+    {
+      "farm": "C",
+      "event_id": 11,
+      "subsistema": "multiplicadora (jack-up)",
+      "mes_real": "oct",
+      "escenarios": {
+        "real oct+restr": {
+          "knee": {
+            "coste": 807536.7,
+            "riesgo": 0.116,
+            "impacto": 4.05
+          },
+          "schedule": [
+            {
+              "task": "C-ev11",
+              "dia": 0
+            }
+          ],
+          "n_soluciones": 84,
+          "narrativa": "Recomendacion: intervenir en [C-ev11@d0 (oct)].\nPor que: equilibra coste, riesgo e impacto ambiental; respeta el veto de reproduccion Marsopa comun (sensibilidad 0.9, KB).\nA que atenerse: coste esperado 807,537 (riesgo 0.12, impacto 4.0); ~6,080 mas que la opcion mas barata del frente, a cambio de menor impacto y/o riesgo.",
+          "alternativas": [
+            "min coste: [C-ev11@d10 (oct)] coste 801,457, riesgo 0.19, impacto 4.6",
+            "min impacto ambiental: [C-ev11@d151 (mar)] coste 1,862,410, riesgo 0.39, impacto 1.5"
+          ]
+        },
+        "junio+restr [sensib.]": {
+          "knee": {
+            "coste": 1287369.5,
+            "riesgo": 0.394,
+            "impacto": 5.66
+          },
+          "schedule": [
+            {
+              "task": "C-ev11",
+              "dia": 92
+            }
+          ],
+          "n_soluciones": 3,
+          "narrativa": "Recomendacion: intervenir en [C-ev11@d92 (sep)].\nPor que: equilibra coste, riesgo e impacto ambiental; respeta el veto de reproduccion Marsopa comun (sensibilidad 0.9, KB).\nA que atenerse: coste esperado 1,287,370 (riesgo 0.39, impacto 5.7).",
+          "alternativas": []
+        },
+        "octubre+restr [sensib.]": {
+          "knee": {
+            "coste": 807536.7,
+            "riesgo": 0.116,
+            "impacto": 4.05
+          },
+          "schedule": [
+            {
+              "task": "C-ev11",
+              "dia": 0
+            }
+          ],
+          "n_soluciones": 84,
+          "narrativa": "Recomendacion: intervenir en [C-ev11@d0 (oct)].\nPor que: equilibra coste, riesgo e impacto ambiental; respeta el veto de reproduccion Marsopa comun (sensibilidad 0.9, KB).\nA que atenerse: coste esperado 807,537 (riesgo 0.12, impacto 4.0); ~6,080 mas que la opcion mas barata del frente, a cambio de menor impacto y/o riesgo.",
+          "alternativas": [
+            "min coste: [C-ev11@d10 (oct)] coste 801,457, riesgo 0.19, impacto 4.6",
+            "min impacto ambiental: [C-ev11@d151 (mar)] coste 1,862,410, riesgo 0.39, impacto 1.5"
+          ]
+        },
+        "junio SIN restr [sensib.]": {
+          "knee": {
+            "coste": 777371.8,
+            "riesgo": 0.111,
+            "impacto": 0.0
+          },
+          "schedule": [
+            {
+              "task": "C-ev11",
+              "dia": 2
+            }
+          ],
+          "n_soluciones": 15,
+          "narrativa": "Recomendacion: intervenir en [C-ev11@d2 (jun)].\nPor que: equilibra coste, riesgo e impacto ambiental.\nA que atenerse: coste esperado 777,372 (riesgo 0.11, impacto 0.0); ~2,345 mas que la opcion mas barata del frente, a cambio de menor impacto y/o riesgo.",
+          "alternativas": [
+            "min coste: [C-ev11@d5 (jun)] coste 775,027, riesgo 0.12, impacto 0.0",
+            "min riesgo: [C-ev11@d0 (jun)] coste 782,192, riesgo 0.11, impacto 0.0"
+          ]
+        }
+      }
+    },
+    {
+      "farm": "B",
+      "event_id": 53,
+      "subsistema": "generador (CTV)",
+      "mes_real": "dic",
+      "escenarios": {
+        "real dic+restr": {
+          "knee": {
+            "coste": 360149.5,
+            "riesgo": 0.09,
+            "impacto": 1.39
+          },
+          "schedule": [
+            {
+              "task": "B-ev53",
+              "dia": 0
+            }
+          ],
+          "n_soluciones": 39,
+          "narrativa": "Recomendacion: intervenir en [B-ev53@d0 (dic)].\nPor que: equilibra coste, riesgo e impacto ambiental; respeta el veto de reproduccion Marsopa comun (sensibilidad 0.9, KB).\nA que atenerse: coste esperado 360,149 (riesgo 0.09, impacto 1.4); ~114,545 mas que la opcion mas barata del frente, a cambio de menor impacto y/o riesgo.",
+          "alternativas": [
+            "min coste: [B-ev53@d8 (dic)] coste 245,604, riesgo 0.13, impacto 1.7",
+            "min impacto ambiental: [B-ev53@d90 (mar)] coste 931,897, riesgo 0.39, impacto 1.0"
+          ]
+        },
+        "junio+restr [sensib.]": {
+          "knee": {
+            "coste": 307330.1,
+            "riesgo": 0.086,
+            "impacto": 2.59
+          },
+          "schedule": [
+            {
+              "task": "B-ev53",
+              "dia": 3
+            }
+          ],
+          "n_soluciones": 24,
+          "narrativa": "Recomendacion: intervenir en [B-ev53@d3 (jun)].\nPor que: equilibra coste, riesgo e impacto ambiental; respeta el veto de reproduccion Marsopa comun (sensibilidad 0.9, KB).\nA que atenerse: coste esperado 307,330 (riesgo 0.09, impacto 2.6); ~89,295 mas que la opcion mas barata del frente, a cambio de menor impacto y/o riesgo.",
+          "alternativas": [
+            "min coste: [B-ev53@d7 (jun)] coste 218,035, riesgo 0.10, impacto 2.8",
+            "min riesgo: [B-ev53@d0 (jun)] coste 367,529, riesgo 0.08, impacto 2.5"
+          ]
+        },
+        "octubre+restr [sensib.]": {
+          "knee": {
+            "coste": 295646.5,
+            "riesgo": 0.093,
+            "impacto": 0.91
+          },
+          "schedule": [
+            {
+              "task": "B-ev53",
+              "dia": 3
+            }
+          ],
+          "n_soluciones": 24,
+          "narrativa": "Recomendacion: intervenir en [B-ev53@d3 (oct)].\nPor que: equilibra coste, riesgo e impacto ambiental; respeta el veto de reproduccion Marsopa comun (sensibilidad 0.9, KB).\nA que atenerse: coste esperado 295,646 (riesgo 0.09, impacto 0.9); ~68,284 mas que la opcion mas barata del frente, a cambio de menor impacto y/o riesgo.",
+          "alternativas": [
+            "min coste: [B-ev53@d7 (oct)] coste 227,362, riesgo 0.11, impacto 1.1",
+            "min riesgo: [B-ev53@d0 (oct)] coste 364,967, riesgo 0.09, impacto 0.8"
+          ]
+        },
+        "junio SIN restr [sensib.]": {
+          "knee": {
+            "coste": 285031.3,
+            "riesgo": 0.089,
+            "impacto": 0.0
+          },
+          "schedule": [
+            {
+              "task": "B-ev53",
+              "dia": 4
+            }
+          ],
+          "n_soluciones": 24,
+          "narrativa": "Recomendacion: intervenir en [B-ev53@d4 (jun)].\nPor que: equilibra coste, riesgo e impacto ambiental.\nA que atenerse: coste esperado 285,031 (riesgo 0.09, impacto 0.0); ~66,997 mas que la opcion mas barata del frente, a cambio de menor impacto y/o riesgo.",
+          "alternativas": [
+            "min coste: [B-ev53@d7 (jun)] coste 218,035, riesgo 0.10, impacto 0.0",
+            "min riesgo: [B-ev53@d0 (jun)] coste 367,529, riesgo 0.08, impacto 0.0"
+          ]
+        }
+      }
+    }
+  ],
+  "campana": {
+    "n_tareas": 2,
+    "knee": {
+      "coste": 1172503.7,
+      "riesgo": 0.202,
+      "impacto": 4.81
+    },
+    "narrativa": "Recomendacion: intervenir en [C-ev11@d0 (oct), B-ev53@d0 (oct)].\nPor que: equilibra coste, riesgo e impacto ambiental; respeta el veto de reproduccion Marsopa comun (sensibilidad 0.9, KB).\nA que atenerse: coste esperado 1,172,504 (riesgo 0.20, impacto 4.8); ~143,685 mas que la opcion mas barata del frente, a cambio de menor impacto y/o riesgo.",
+    "alternativas": [
+      "min coste: [C-ev11@d10 (oct), B-ev53@d7 (oct)] coste 1,028,819, riesgo 0.30, impacto 5.6",
+      "min impacto ambiental: [C-ev11@d151 (mar), B-ev53@d0 (oct)] coste 2,227,376, riesgo 0.48, impacto 2.2"
+    ]
+  }
+}

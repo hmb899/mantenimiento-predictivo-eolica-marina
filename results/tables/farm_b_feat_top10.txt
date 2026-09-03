@@ -1,0 +1,10 @@
+sensor_20_avg
+sensor_5_avg
+sensor_52_avg
+sensor_51_avg
+sensor_53_avg
+sensor_47_avg
+sensor_46_avg
+sensor_10_avg
+sensor_41_avg
+sensor_33_avg

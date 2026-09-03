@@ -1,0 +1,7 @@
+# preprocesado ligero de la granja B, con dedup y sin el suavizado Savitzky-Golay, que es el
+# paso que mas altera la señal
+#   python run_preprocessing.py --patch config/experiments/l6_light.yaml --out l6light
+data:
+  dedup_train: true
+smoothing:
+  enabled: false

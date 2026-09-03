@@ -1,0 +1,25 @@
+{
+  "farm": "C",
+  "experiment": "identical_ae_retrain",
+  "seed": 123,
+  "K": 55,
+  "window_size": 27,
+  "epochs": 25,
+  "best_val_loss": 0.556227884780277,
+  "train_seconds": 230,
+  "care_cv": 0.7121657615255579,
+  "optimism": 0.01125257953763903,
+  "best": {
+    "h_scale": 0.005,
+    "care": 0.7234183410631969,
+    "f1": 0.5297199020737328,
+    "roc_ds": 0.8112305854241338,
+    "cov": 0.64790103276919,
+    "earl": 0.4480177611234214,
+    "rel": 0.7874015748031497,
+    "acc": 0.8668856683101117,
+    "earl_conditional": 0.636656818438546
+  },
+  "roc_window": 0.6774227661034047,
+  "ae_ckpt": "results/models/farm_c_ident_s123_best.pt"
+}

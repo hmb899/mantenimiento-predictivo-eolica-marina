@@ -1,0 +1,6 @@
+# granja C con ventana de 24 muestras, el seq_len de PruebasTFM, y dedup
+#   python run_preprocessing.py --patch config/experiments/l9_w24.yaml --out w24 --farm C
+data:
+  dedup_train: true
+windowing:
+  window_size_samples: 24

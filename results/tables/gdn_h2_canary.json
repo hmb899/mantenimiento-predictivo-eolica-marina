@@ -1,0 +1,21 @@
+{
+  "milestone": "H2_canary",
+  "n_windows": 64,
+  "epochs": 400,
+  "n_params": 4097,
+  "embed_dim": 64,
+  "topk": 12,
+  "context": 26,
+  "loss_first": 1.145294725894928,
+  "loss_last": 0.19371019303798676,
+  "err_train_mean": 0.3288508653640747,
+  "err_train_std": 0.06639724224805832,
+  "err_permuted_mean": 0.7627899050712585,
+  "err_noise_mean": 1.611332893371582,
+  "ratio_permuted_over_train": 2.319561719894409,
+  "ratio_noise_over_train": 4.8998894691467285,
+  "verdict": "PASS",
+  "train_seconds": 5.0,
+  "device": "cuda",
+  "figure": "results\\figures\\gdn\\h2_canary_forecast.png"
+}

@@ -1,0 +1,21 @@
+{
+  "milestone": "H1_canary",
+  "n_windows": 64,
+  "epochs": 400,
+  "n_params": 414241,
+  "split": 9,
+  "ddim_steps": 10,
+  "loss_first": 0.975606307387352,
+  "loss_last": 0.13903325609862804,
+  "err_train_mean": 0.14937678480055183,
+  "err_train_std": 0.05380374942269644,
+  "err_permuted_mean": 0.25327994604595006,
+  "err_permuted_std": 0.1298554779980694,
+  "err_noise_mean": 1.0369447320699692,
+  "err_noise_std": 0.03401220784980315,
+  "ratio_permuted_over_train": 1.6955777056262786,
+  "ratio_noise_over_train": 6.941806475848973,
+  "train_seconds": 38.8,
+  "device": "cuda",
+  "figure": "results\\figures\\imdiffusion\\h1_canary_imputation.png"
+}

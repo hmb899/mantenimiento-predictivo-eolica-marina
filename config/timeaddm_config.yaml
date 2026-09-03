@@ -1,0 +1,72 @@
+data:
+  processed_path: "data/processed"
+  farms: ["B", "C"]
+
+  # subconjunto de features de la variante B, D son 15 features y B son 22
+  variant_b_subset:
+    B: "D"
+    C: "B"
+
+scaling:
+  feature_range: [0, 1]
+
+lstmae:
+  hidden_size: 64
+  dropout: 0.0
+  learning_rate: 0.001
+  max_epochs: 200
+  batch_size: 128
+  val_fraction: 0.1
+  early_stopping:
+    patience: 10
+    min_delta: 0.0001
+    restore_best_weights: true
+
+diffusion:
+  num_diffusion_timesteps: 500
+  beta_schedule: "linear"
+  beta_start: 0.0001
+  beta_end: 0.02
+  learning_rate: 0.0002
+  max_epochs: 50
+  batch_size: 128
+  val_fraction: 0.1
+  grad_clip: 1.0
+  early_stopping:
+    patience: 5
+    min_delta: 0.0001
+    restore_best_weights: true
+
+# U-Net. El GroupNorm obliga a que ch sea multiplo de 32; out_ch se fija en ejecucion a
+# lstmae.hidden_size, y data.image_size al tamaño de la ventana
+model:
+  ch: 128
+  ch_mult: [1, 2]
+  num_res_blocks: 2
+  dropout: 0.1
+  resamp_with_conv: true
+  attn_resolutions: []
+
+# reconstruccion multinivel ponderada. noise_levels son los pasos de difusion a los que se
+# añade ruido antes de quitarlo, y noise_weights sus pesos, que tienen que sumar 1.0
+scoring:
+  noise_levels: [50, 100, 250, 500]
+  noise_weights: [0.1, 0.2, 0.3, 0.4]
+  ddim_steps: 40
+  threshold_percentile: 75.0
+  max_calibration_samples: 50000
+
+cusum:
+  alarm_threshold: 18
+
+evaluation:
+  care_score:
+    beta: 0.5
+
+output:
+  models_dir: "results/models"
+  figures_dir: "results/figures/timeaddm"
+  tables_dir: "results/tables"
+
+reproducibility:
+  random_seed: 42

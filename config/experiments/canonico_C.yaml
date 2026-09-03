@@ -1,0 +1,18 @@
+# configuracion canonica de la granja C, reproduce desde data/raw el corpus congelado
+# farm_c_train_windows.npz con (2358533, 27, 35), 58 secuencias y 149 270 ventanas de test
+#   python run_preprocessing.py --farm C --patch config/experiments/canonico_C.yaml
+#
+# es la configuracion opuesta a la de la granja B, que va con dedup y sin suavizado, asi
+# que no hay un patch valido para las dos, y run_preprocessing.py sin --farm procesa B y C
+# con un unico diccionario, con lo que no puede sacar los dos artefactos canonicos
+#
+# reproduce la representacion window-first de C, 35 variables y sin PCA; no es la final, que
+# es pca-first top-100 con K=55 y sin suavizado, y la construye run_model._prep_pca_first
+#
+# dedup_train no se declara a proposito, el informe congelado de C no trae esa clave y el
+# valor por defecto de pipeline.py ya es false; ausente documenta que C no paso por ahi
+#
+# lanza siempre con --out <sufijo>, que la ruta de salida por defecto es la canonica
+
+smoothing:
+  enabled: true

@@ -1,0 +1,82 @@
+# reimplementacion del GDN de Deng y Hooi (AAAI 2021, arXiv:2106.06947). Predice el paso
+# siguiente de cada sensor sobre un grafo de sensores aprendido, y el score de desviacion es el
+# error de prevision por sensor normalizado con la mediana y el IQR del normal de validacion.
+# La deteccion, el umbral, el CUSUM y el CARE los pone el harness de run_model.evaluate
+
+data:
+  processed_path: "data/processed"
+  raw_path: "data/raw/CARE_To_Compare"
+
+model:
+  embed_dim: 64  # el GDN acopla la dimension del embedding de nodo con la de la atencion
+  out_layer_inter_dim: 128
+  out_layer_num: 1  # profundidad del MLP de salida por nodo
+  topk: 15  # vecinos por nodo, siempre muy por debajo del numero de nodos
+  leaky_relu_slope: 0.2
+
+graph:
+  mode: "learned"  # la adyacencia es inyectable; correlation usa Spearman, y estan full y none
+  include_self_loops: true
+
+isolation_forest:  # limpia ventanas de la arm curated, para igualar al AE y al ImDiffusion
+  variance_threshold: 0.95
+  contamination: 0.01
+  n_estimators: 100
+
+windowing:
+  window_size: 27  # W de anclaje, comparable con el AE y el ImDiffusion
+  context: 26  # el slide_win del GDN, los ultimos pasos que predicen el objetivo
+  horizon: 1  # pasos de prevision que entran en el error; con mas cuesta ver el fallo estable
+  stride_test: 1  # fijo por protocolo, los instantes de la ventana alimentan el tc oficial
+
+# el viento y la temperatura ambiente siguen siendo nodos del grafo pero quedan fuera de la
+# agregacion de la desviacion, para no marcar como fallo un dia de viento fuerte
+regime:
+  enabled: false
+  exo_keywords: null  # con null van los anclajes por defecto de cada granja
+
+training:
+  epochs: 30
+  batch_size: 256
+  stride_train: 1  # palanca de coste, solo en train y nunca en test
+  learning_rate: 1.0e-3
+  weight_decay: 0.0
+  loss: "mse"  # huber y mae aguantan mejor los picos del SCADA
+  val_ratio: 0.2  # cola normal apartada para diagnostico; la seleccion mira el ROC-ds
+  num_workers: 0
+
+scoring:
+  normalization: "median_iqr"  # norma robusta por sensor, del error del normal de validacion
+  aggregation: "max"  # sobre los sensores; el articulo usa max, tambien hay mean y topk
+  topk_q: 0.9
+  horizon: 1  # pasos de prevision agregados en el error
+  batch_size: 512
+
+threshold:
+  percentile: 99.0  # atributo cosmetico que exige el contrato del harness, campo del JSON
+
+output:
+  models_dir: "results/models"
+  tables_dir: "results/tables"
+  figures_dir: "results/figures"
+
+reproducibility:
+  seeds: [42, 7]
+
+per_farm:
+  B:
+    features: "curated"  # arm de representacion; tambien hay soft y allavg
+    isolation_forest_mask: true  # se aplica la mascara de retencion del AE
+    model:
+      topk: 12  # unos 30 nodos
+  C:
+    features: "top100"  # tambien hay allavg
+    isolation_forest_mask: false  # la via pca-first de C nunca uso Isolation Forest
+    model:
+      topk: 18  # unos 100 nodos
+    training:
+      batch_size: 256
+      epochs: 20
+      stride_train: 8  # adelgaza el 1.12M de ventanas de train de C, por coste y RAM
+    scoring:
+      batch_size: 512

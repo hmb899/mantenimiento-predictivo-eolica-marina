@@ -1,0 +1,101 @@
+# autoencoder Bi-LSTM con Isolation Forest (Barnabei 2024). La cadena entera es escalado, PCA,
+# Isolation Forest, Bi-LSTM AE y CUSUM; el escalador lo fija scaling.method, StandardScaler
+# donde Barnabei usa MinMaxScaler
+
+data:
+  processed_path: "data/processed"
+  results_path: "results"
+  farms: ["B", "C"]
+
+# se ajusta sobre las ventanas de train y se aplica tambien a las de test
+scaling:
+  method: "standard"  # cada granja puede pisarlo en per_farm
+  feature_range: [0, 1]  # el StandardScaler lo ignora, solo lo mira el MinMaxScaler
+
+# ajustada sobre las ventanas ya escaladas del train, aplicada a train y test
+pca:
+  variance_threshold: 0.95  # fraccion de varianza que se conserva
+  whiten: false
+
+# quita ventanas anomalas del train despues de la PCA, para que el AE solo vea lo normal
+isolation_forest:
+  enabled: true  # B lo usa y C lo apaga, en su rama pca-first de muchas features
+  contamination: 0.01  # fraccion de outliers que se espera en el train
+  n_estimators: 100
+  random_state: 42
+  n_jobs: -1  # todos los nucleos
+
+# encoder y decoder simetricos; la entrada es (batch, ventana, componentes de PCA)
+autoencoder:
+  encoder_units: [64, 16]  # cuello estrecho, la anomalia reconstruye peor
+  decoder_units: [16, 64]
+  bidirectional: true  # Barnabei 2024
+  dropout: 0.1  # regularizacion, evita que memorice patrones anomalos
+  activation: "relu"  # capa de salida
+
+  # entrenamiento
+  optimizer: "adam"
+  learning_rate: 0.0001  # Barnabei 2024
+  loss: "mse"  # castiga mas el error grande, separa mejor la anomalia
+  batch_size: 2048
+  max_epochs: 100
+  early_stopping:
+    patience: 5  # epocas seguidas sin mejorar antes de parar
+    min_delta: 0.0001  # mejora minima para contar como progreso
+    restore_best_weights: true
+
+  val_fraction: 0.1  # cola temporal del train, en orden cronologico para no filtrar
+
+# separa ventana normal de anomala por el error de reconstruccion, medido sobre las ventanas
+# de train limpias que deja el Isolation Forest
+threshold:
+  method: "percentile"
+  percentile: 90.0  # cuanto mas bajo, mas sensible la deteccion
+
+# suaviza en el tiempo (Barnabei 2024). Con anomalia y estado normal la criticidad sube 1, con
+# normal y estado normal baja 1 sin bajar de 0, y la alarma salta al llegar al umbral
+cusum:
+  alarm_threshold: 18  # 18 pasos de 10 min = 3 h
+
+# CARE (Guck 2024) = (Fβ + WS + EFβ + 2·Ācc) / 5, o sea Coverage Fβ, Earliness WS,
+# Reliability EFβ y Accuracy Ācc media por evento normal
+evaluation:
+  care_score:
+    beta: 0.5  # β de Fβ, pesa el recall a la mitad que la precision
+    # el tc no sale de aqui. el oficial (src/care_official) lo lleva clavado en 72, el valor
+    # del articulo, y es el que mide toda cifra publicada; el propio (src/models/evaluator.py)
+    # toma el suyo de cusum.alarm_threshold, que son 18. el 72 esta clavado a proposito, para
+    # que una edicion de este fichero no pueda mover la metrica oficial, que es lo que hace la
+    # cifra comparable con el baseline del articulo
+  additional_metrics:
+    - "precision"
+    - "recall"
+    - "f1"
+    - "auc_roc"
+
+output:
+  models_dir: "results/models"
+  figures_dir: "results/figures"
+  tables_dir: "results/tables"
+  save_best_model: true
+  checkpoint_every_n_epochs: 10
+
+reproducibility:
+  random_seed: 42
+
+# se funde en profundidad sobre la base en run_model.run_farm. El orden y la limpieza no son
+# unificables, B va window-first con limpieza pesada y C pca-first sin Isolation Forest.
+# Los interruptores de preprocesado estan en preprocessing_config.yaml
+order: window_first  # por defecto, cada granja lo pisa abajo
+per_farm:
+  B:
+    order: window_first
+    scaling: { method: standard }
+    isolation_forest: { enabled: true, contamination: 0.01 }
+    # window-first re-preprocesa desde raw en proceso, no depende de ningun .npz
+  C:
+    order: pca_first
+    scaling: { method: standard }
+    isolation_forest: { enabled: false }
+    features:
+      subset_file: config/farm_c_top100_features.txt

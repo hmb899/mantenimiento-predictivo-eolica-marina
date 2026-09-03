@@ -1,0 +1,40 @@
+{
+  "milestone": "H5_ola3_repr",
+  "farm": "C",
+  "features": "allavg",
+  "subset": "S_top150",
+  "seeds": [
+    42,
+    7
+  ],
+  "epochs": 20,
+  "metric": "mahalanobis",
+  "n_nodes": 150,
+  "topk": 18,
+  "care_cv_mean": 0.7238920053589524,
+  "care_cv_std": 0.0007122870684808658,
+  "roc_ds_mean": 0.8859020310633213,
+  "roc_ds_std": 0.0029868578255675127,
+  "per_seed": [
+    {
+      "seed": 42,
+      "care_cv": 0.7231797182904716,
+      "roc_ds": 0.8888888888888888,
+      "coverage": 0.771271155271261,
+      "earliness": 0.5444136467184045,
+      "reliability": 0.6650246305418719,
+      "accuracy": 0.8254153971799676,
+      "optimism": 0.0031283270878229574
+    },
+    {
+      "seed": 7,
+      "care_cv": 0.7246042924274333,
+      "roc_ds": 0.8829151732377538,
+      "coverage": 0.7744069521087072,
+      "earliness": 0.5499102295556767,
+      "reliability": 0.6650246305418719,
+      "accuracy": 0.8198238193439663,
+      "optimism": 0.0011935977514043739
+    }
+  ]
+}

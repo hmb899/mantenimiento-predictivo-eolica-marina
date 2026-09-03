@@ -1,0 +1,144 @@
+# catalogo citable de parametros de tareas de mantenimiento. El Agente 2 solo elige una
+# entrada y la ventana, nunca escribe numeros. Los costes van en euros de referencia, y
+# como el dataset CARE esta anonimizado y normalizado la lectura es relativa, el orden
+# entre subsistemas, no absoluta. Cada entrada lleva su fuente por clave bib de la
+# bibliografia de la memoria, y las cifras exactas van marcadas con assumption
+
+globales:
+  recursos:
+    coste_dia_ctv: 5000.0  # tarifa diaria de un Crew Transfer Vessel
+    fuente: "EdA §costes O&M (hu_current_2024): CTV = recurso limitado y costoso de movilizar"
+    assumption: true  # la tarifa diaria exacta es un valor representativo
+
+  # lucro cesante por dia de parada de la turbina degradada, que sale de la potencia
+  # nominal por el factor de capacidad, por 24 h y por el precio del MWh
+  lucro_cesante:
+    potencia_nominal_mw: 10.0
+    factor_capacidad: 0.50
+    precio_eur_mwh: 80.0
+    coste_generacion_dia: 9600.0  # = 10.0 * 0.50 * 24 * 80.0
+    fuente: "EdA §costes O&M (hu_current_2024): las paradas no programadas incluyen perdidas de
+             produccion; turbinas offshore actuales de 10-20 MW (EdA §intro)"
+    assumption: true
+
+  # una maquina degradada no se apaga a esperar la reparacion, opera derateada. Bajar la
+  # potencia baja la carga y frena el dano, pero no evita el fallo, solo aleja la fecha de
+  # rotura, y si no se repara para entonces la pieza rompe igual. El correctivo corre hasta
+  # la rotura desde ya y arrastra un downtime de emergencia largo
+  operacion_degradada:
+    derate_factor: 0.20  # fraccion de generacion que se pierde operando derateada
+    p_fallo_max: 1.0  # probabilidad de fallo en la fecha de rotura ya extendida
+    # ISO 281 da la vida L10 de un rodamiento como (C/P)^(10/3), asi que bajar la carga un
+    # 20% sale (1/0.8)^(10/3) ~= 2x de vida y el riesgo llega a 1.0 al doble de la urgencia
+    factor_ventana_derating: 2.0
+    fuente: "ISO 281 (vida basica de rodamiento L10 ~ (C/P)^(10/3), rodillos): reducir la carga ~20%
+             (derate_factor 0.20) da (1/0.8)^(10/3) ~= 2.0x de vida -> factor ~= 2, no 4 (iso281_2007,
+             rommel_2021). Matiz: L10 = fatiga de un rodamiento SANO; con grieta ya iniciada el
+             mecanismo es propagacion (Paris), cualitativamente igual (reducir la carga la frena),
+             factor exacto por confirmar -> mas conservador que 4"
+    assumption: true
+  reaccion_emergencia:
+    espera_emergencia_jackup_dias: 45  # jack-up de emergencia mas ventana de meteo
+    espera_emergencia_ctv_dias: 14
+    fuente: "research O&M offshore: movilizacion de buque de gran porte 3-6 semanas + ventana meteo; una
+             visita correctiva offshore cuesta multiplos de la planificada (Carroll2015, hu_current_2024)"
+    assumption: true
+
+  # lead minimo para contratar el recurso a precio planificado. Intervenir antes del lead
+  # exige movilizacion expedita y eso lleva prima, asi que lo antes posible no es lo mas
+  # barato, y hay un punto dulce entre la prima por correr y el derating, el riesgo y el
+  # impacto de diferir
+  planificacion:
+    # ~8 semanas, lead del componente mayor mas la reserva del jack-up, el cuello de botella
+    lead_planificacion_jackup_dias: 56
+    lead_planificacion_ctv_dias: 7  # el CTV esta disponible en dias
+    # x2.5 el coste de intervenir en el dia 0, cerca del correctivo de emergencia, y baja
+    # a x1 en cuanto se alcanza el lead
+    prima_urgencia_max: 2.5
+    fuente: "los jack-up de gran porte se reservan con semanas/meses de antelacion y su movilizacion
+             urgente lleva prima; broek_evaluating_2019 modela el plazo de contratacion en 7 dias
+             (mejor caso), 60 (probable) y 120 (peor) — los 56 de aqui son su caso probable
+             (Carroll2015, hu_current_2024)"
+    assumption: true
+
+  # impacto acustico de la intervencion segun el buque. El jack-up, con izado pesado, patas
+  # y taladro, es lo mas ruidoso e intrusivo, y el CTV es una visita ligera. Los niveles van
+  # normalizados en la escala de emision de acoustic.py, banda por debajo de 1 kHz
+  impacto_intervencion:
+    factor_ruido_jackup: 1.0
+    factor_ruido_ctv: 0.3
+    factor_trafico_jackup: 1.0
+    factor_trafico_ctv: 0.6
+    fuente: "research O&M: el jack-up es la operacion mas intrusiva (izado pesado); el CTV perturba
+             mucho menos. Niveles relativos"
+    assumption: true
+
+# tareas por subsistema. duracion_dias son dias de trabajo accesibles a bordo, y los costes
+# y riesgos dan el orden relativo entre subsistemas, con la multiplicadora como la mas
+# critica por coste y tiempo de reparacion, no cifras absolutas del parque anonimizado
+subsistemas:
+  multiplicadora:
+    descripcion: "gearbox: tren de engranajes eje lento->rapido; el componente mas critico por coste y tiempo de reparacion, requiere jack-up"
+    duracion_dias: 5
+    coste_intervencion: 250000.0
+    riesgo_fallo_base: 0.10
+    riesgo_crecimiento_dia: 0.004
+    coste_correctivo: 800000.0
+    requiere_jackup: true
+    fuente: "EdA §componentes/costes: componente mas critico (alagha_artificial_2025); reemplazo mayor >230.000 EUR solo materiales + grua jack-up (Carroll2015)"
+    assumption: true
+
+  rodamiento_principal:
+    descripcion: "main bearing: rodamiento del eje principal; degradacion progresiva (temperatura/vibracion), requiere jack-up"
+    duracion_dias: 4
+    coste_intervencion: 180000.0
+    riesgo_fallo_base: 0.09
+    riesgo_crecimiento_dia: 0.0035
+    coste_correctivo: 500000.0
+    requiere_jackup: true
+    fuente: "EdA §distribucion de fallos (alagha_artificial_2025): rodamientos con incremento progresivo de temperatura/vibracion antes de la averia catastrofica"
+    assumption: true
+
+  generador:
+    descripcion: "generator: rodamientos y aislamiento de bobinas; intervencion via CTV sin jack-up"
+    duracion_dias: 3
+    coste_intervencion: 120000.0
+    riesgo_fallo_base: 0.08
+    riesgo_crecimiento_dia: 0.003
+    coste_correctivo: 400000.0
+    requiere_jackup: false
+    fuente: "EdA §componentes: fallos del generador asociados a rodamientos y aislamiento de bobinas"
+    assumption: true
+
+  pitch:
+    descripcion: "sistema de pitch: actuadores hidraulicos/electricos de las palas; averias frecuentes, intervencion menor via CTV"
+    duracion_dias: 1
+    coste_intervencion: 15000.0
+    riesgo_fallo_base: 0.05
+    riesgo_crecimiento_dia: 0.002
+    coste_correctivo: 80000.0
+    requiere_jackup: false
+    fuente: "EdA §distribucion de fallos: el pitch es fuente frecuente de averias por la complejidad de sus actuadores"
+    assumption: true
+
+  convertidor:
+    descripcion: "convertidor de frecuencia: subsistema electrico de potencia; intervencion via CTV"
+    duracion_dias: 1
+    coste_intervencion: 25000.0
+    riesgo_fallo_base: 0.06
+    riesgo_crecimiento_dia: 0.0025
+    coste_correctivo: 120000.0
+    requiere_jackup: false
+    fuente: "EdA §variables electricas (convertidor de frecuencia)"
+    assumption: true
+
+  generico:
+    descripcion: "intervencion generica de subsistema no identificado (canales anonimizados -> subsistema desconocido); parametros intermedios via CTV"
+    duracion_dias: 2
+    coste_intervencion: 60000.0
+    riesgo_fallo_base: 0.07
+    riesgo_crecimiento_dia: 0.003
+    coste_correctivo: 250000.0
+    requiere_jackup: false
+    fuente: "supuesto de trabajo: valores intermedios para una intervencion sin subsistema identificado (el dataset CARE esta anonimizado)"
+    assumption: true

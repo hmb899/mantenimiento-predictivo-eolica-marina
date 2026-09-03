@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mantenimiento predictivo — Consola de operador</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="win">
+  <div class="titlebar">
+    <span class="tt">MANTENIMIENTO PREDICTIVO - CONSOLA DE OPERADOR</span>
+    <span class="sp"></span>
+    <span class="env">ERA5 <b id="env-era5">-</b> &middot; qwen3 <b id="env-llm">-</b></span>
+    <span class="ctl"><b>_</b><b>[]</b><b>X</b></span>
+  </div>
+
+  <div class="body">
+
+
+    <div id="screen-select" class="select-wrap">
+      <h2>Seleccion de caso</h2>
+      <div class="farmbar">
+        <span class="lab">Granja</span>
+        <span id="farm-buttons"></span>
+        <span class="lab" style="margin-left:10px">Evento (alarma)</span>
+      </div>
+      <div id="cases" class="cases">
+        <div class="loading">Cargando eventos<span class="blink">_</span></div>
+      </div>
+    </div>
+
+
+    <div id="screen-cockpit" class="hidden">
+
+      <div class="row r-status">
+        <div class="pnl">
+          <div class="cap"><span>Estado de alarma</span><span class="tnum" id="cap-case">-</span></div>
+          <div class="alarm" id="alarm">
+            <div class="lamp"></div>
+            <div class="stxt"><div class="s1" id="astate">NORMAL</div>
+              <div class="s2" id="asub">vigilancia - sin precursor</div></div>
+          </div>
+        </div>
+        <div class="pnl meter-wrap">
+          <div class="cap"><span>Senal</span></div>
+          <div class="meter" id="meter"></div>
+          <div class="lbl">CUSUM S/h</div>
+        </div>
+      </div>
+
+
+      <div class="pnl">
+        <div class="cap"><span>Deteccion - CUSUM en el tiempo</span><span id="cap-det">detector TrajDev</span></div>
+        <div class="chart-head">
+          <div class="clock"><small>Reloj del evento</small><span class="tnum" id="clock">--</span></div>
+          <div class="mono-kv">margen S/h <b class="tnum" id="margin">-</b><br>canal <b id="channel">-</b></div>
+        </div>
+        <div class="chartwell"><canvas id="cusum" width="880" height="132"></canvas></div>
+        <div class="transport">
+          <button class="btn rew" id="replay">&#9654; repetir</button>
+          <span id="tstate">-</span><span class="bar sunken"><span class="fill" id="prog"></span></span>
+          <span class="tnum" id="pct">0%</span>
+        </div>
+      </div>
+
+
+      <div class="row r-scada">
+        <div class="pnl">
+          <div class="cap"><span id="cap-turb">Aerogenerador</span><span id="tmode">-</span></div>
+          <div class="turbine-stage">
+            <div class="turbine" id="turbine">
+              <div class="tower"></div><div class="nacelle"></div>
+              <div class="rotor"><span class="blade b1"></span><span class="blade b2"></span><span class="blade b3"></span><span class="hub"></span></div>
+            </div>
+            <div class="tstate">modo: <b id="tmode2">nominal</b></div>
+            <div class="power">potencia<br><b class="tnum" id="power">-</b></div>
+          </div>
+        </div>
+        <div class="pnl">
+          <div class="cap"><span>Meteo / acceso (ERA5)</span><span id="wx-mes">-</span></div>
+          <div class="wx" id="wx"><div class="na">sin datos meteo para este evento</div></div>
+        </div>
+        <div class="pnl">
+          <div class="cap"><span id="cap-farm">Parque</span></div>
+          <div class="farm" id="farm"></div>
+          <div class="farm-leg"><i><span class="sq" style="background:#245b34"></span>operativa</i>
+            <i><span class="sq" style="background:#c22323"></span>turbina afectada</i></div>
+        </div>
+      </div>
+
+
+      <div class="pnl" style="margin-top:8px">
+        <div class="cap"><span>Diagnostico y decision</span><span>diagnostico sin etiqueta - las reglas deciden</span></div>
+        <div class="diag" id="diag"><div class="loading">Compilando expediente XAI<span class="blink">_</span></div></div>
+        <div id="decision-area" style="margin-top:8px"></div>
+      </div>
+
+      <div id="reveal" class="hidden"></div>
+
+      <div class="pnl hidden" id="timeline-panel" style="margin-top:8px">
+        <div class="cap"><span>Linea de tiempo del plan</span><span id="tl-sub">-</span></div>
+        <canvas id="timeline" width="1120" height="96"></canvas>
+        <div class="tl-leg">
+          <i><span class="sq" style="background:#e69500"></span>sensibilidad fauna</i>
+          <i><span class="sq" style="background:#2c7fb8"></span>intervencion</i>
+          <i><span class="sq" style="background:#f1c40f"></span>derating (espera)</i>
+          <i><span class="sq" style="background:#c22323"></span>fallo probable sin actuar</i>
+          <i><span class="sq" style="background:rgba(194,35,35,.3)"></span>veto jack-up (fauna)</i>
+        </div>
+      </div>
+
+      <div class="term">
+        <div class="screen flicker">
+          <div class="thead"><span>ASISTENTE // qwen3-local</span><span>AMBITO: ESTA ALARMA</span></div>
+          <div class="log" id="log"></div>
+          <div class="cmd"><span>&gt;</span>
+            <input id="chat-input" type="text" autocomplete="off" placeholder="consultar sobre la alarma...">
+            <span class="cur"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="statusbar">
+        <span id="status">Listo</span>
+        <span class="bk" id="back">&#8592; otro caso</span>
+        <span id="status-det">-</span>
+        <span class="tnum" id="status-clock">--</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>
