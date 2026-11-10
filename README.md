@@ -1,3 +1,5 @@
+**Repositorio archivado.** Versión congelada del código de la memoria del TFM (UCM, septiembre de 2026). Las cifras de este README están en revisión: al revisar el protocolo de evaluación encontré un problema que las afecta. Las cifras corregidas se publicarán en un repositorio nuevo.
+
 # Mantenimiento Predictivo para Aerogeneradores Offshore con Restricciones Ambientales
 
 
